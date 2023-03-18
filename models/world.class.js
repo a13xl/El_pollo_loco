@@ -36,10 +36,16 @@ class World {
     }    
 
     checkCollisions() {
-        this.level.enemies.forEach(enemy => {
+        this.level.enemies.forEach((enemy, index) => {
             if(this.character.isColliding(enemy)) {
-                this.character.hit();
-                this.statusBar.setPercentage(this.character.energy);
+                if(this.character.speedY < 0 && this.character.isAboveGround()) { // jump on enemy
+                    //this.chicken.hit(100);                        // this.world.level.enemies.splice(index, 1); | remove hit chicken
+                    this.level.enemies[index].hit(5);
+                    console.log('jump on', enemy, index);
+                } else {
+                    this.character.hit(5);
+                    this.statusBar.setPercentage(this.character.energy);
+                }
             }
         });
     }
