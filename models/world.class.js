@@ -25,7 +25,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
-        }, 200);
+        }, 60);
     }
 
     checkThrowObjects() {
@@ -39,12 +39,11 @@ class World {
         this.level.enemies.forEach((enemy, index) => {
             if(this.character.isColliding(enemy)) {
                 if(this.character.speedY < 0 && this.character.isAboveGround()) { // jump on enemy
-                    //this.chicken.hit(100);                        // this.world.level.enemies.splice(index, 1); | remove hit chicken
+                                           // this.world.level.enemies.splice(index, 1); | remove hit chicken
                     this.level.enemies[index].hit(5);
-                    console.log('jump on', enemy, index);
                 } else {
                     this.character.hit(5);
-                    this.statusBar.setPercentage(this.character.energy);
+                    this.statusBar.setPercentage(this.character.hp);
                 }
             }
         });

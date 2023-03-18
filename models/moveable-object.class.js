@@ -3,7 +3,6 @@ class MoveableObject extends DrawableObject{
     otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
-    //energy = 100;
     lastHit = 0;
     offset = {
         top: 0,
@@ -37,9 +36,9 @@ class MoveableObject extends DrawableObject{
     }
 
     hit(dmg) {
-        this.energy -= dmg;
-        if(this.energy < 0) {
-            this.energy = 0;
+        this.hp -= dmg;
+        if(this.hp < 0) {
+            this.hp = 0;
         } else {
             this.lastHit = new Date().getTime();
         }
@@ -52,7 +51,7 @@ class MoveableObject extends DrawableObject{
     }
 
     isDead() {
-        return this.energy == 0;
+        return this.hp == 0;
     }
 
     playAnimation(images) {
