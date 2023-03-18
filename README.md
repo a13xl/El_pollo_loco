@@ -10,3 +10,4 @@ Aufgaben:
 09. Fullscreen (canvas.requestFullscreen())
 10. Erklärung wie Spiel funktioniert
 
+# El_pollo_loco
