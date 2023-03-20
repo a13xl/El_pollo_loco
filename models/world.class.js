@@ -60,6 +60,7 @@ class World {
         this.addToMap(this.statusBar);
         this.ctx.translate(this.camera_x, 0);
 
+        //this.addObjectsToMap(this.level.collectible);
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
         this.addObjectsToMap(this.throwableObject);
@@ -85,7 +86,7 @@ class World {
         }
 
         mo.draw(this.ctx);
-        // mo.drawFrame(this.ctx); // draw Frame around character and chicken
+        mo.drawFrame(this.ctx); // draw Frame around character and chicken
 
         if(mo.otherDirection) {
             this.flipImageBack(mo);

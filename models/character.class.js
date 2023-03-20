@@ -5,12 +5,7 @@ class Character extends MoveableObject {
     speed = 10;
     hp = 100;
 
-    offset = {
-        top: 100,
-        bottom: 15,
-        left: 20,
-        right: 20
-    };
+    offset = {top: 100, bottom: 15, left: 20, right: 20};
 
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',

@@ -11,8 +11,14 @@ let level1 = new Level([
     new SmallChicken(1450),
     new SmallChicken(1750),
     new SmallChicken(2150)
-],[
-    new Cloud(),
+],
+[
+    new Cloud(0),
+    new Cloud(719),
+    new Cloud(719 * 2),
+    new Cloud(719 * 3),
+    new Cloud(719 * 4),
+    new Cloud(719 * 5)
 ],
 [
     new BackgroundObject('img/5_background/layers/air.png', -719),
@@ -45,6 +51,21 @@ let level1 = new Level([
     new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 719 * 5),
     new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 719 * 5),
     new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719 * 5)
+],
+[
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin(),
+    new Coin()
 ]);
 
 // NOT WORKING

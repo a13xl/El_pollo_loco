@@ -55,7 +55,6 @@ class MoveableObject extends DrawableObject{
     }
 
     playAnimation(images) {
-        // Walk animation
         let i = this.currentImage % images.length; // let i = 0 mod 6 => 0, Rest 0 BIS let i = 6 mod 6 => 1, Rest 0
         let path = images[i];
         this.img = this.imageCache[path];
