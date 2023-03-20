@@ -39,9 +39,8 @@ class World {
         this.level.enemies.forEach((enemy, index) => {
             if(this.character.isColliding(enemy)) {
                 if(this.character.speedY < 0 && this.character.isAboveGround()) { // jump on enemy
-                                           // this.world.level.enemies.splice(index, 1); | remove hit chicken
-                    this.level.enemies[index].hit(5);
-                } else {
+                    this.level.enemies[index].hit(5); // this.world.level.enemies.splice(index, 1); | remove hit chicken
+                } else if(!this.level.enemies[index].isDead()) {
                     this.character.hit(5);
                     this.statusBar.setPercentage(this.character.hp);
                 }
@@ -61,8 +60,8 @@ class World {
         this.addToMap(this.statusBar);
         this.ctx.translate(this.camera_x, 0);
 
-        this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
+        this.addToMap(this.character);
         this.addObjectsToMap(this.throwableObject);
 
         this.ctx.translate(-this.camera_x, 0);
@@ -86,7 +85,7 @@ class World {
         }
 
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        // mo.drawFrame(this.ctx); // draw Frame around character and chicken
 
         if(mo.otherDirection) {
             this.flipImageBack(mo);
