@@ -17,16 +17,16 @@ class ThrowableObject extends MoveableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/7_bottle_splash.png'
     ];
 
-    offset = {top: 30, bottom: 30, left: 30, right: 30}
+    offset = {top: 10, bottom: 10, left: 5, right: 5}
 
     constructor(x, y) {
-        super().loadImage(this.IMAGES[2]);
-        this.loadImage(this.IMAGES);
+        super().loadImage(this.IMAGES_THROW[3]);
+        //this.loadImage(this.IMAGES_THROW);
 
         this.x = x;
         this.y = y;
-        //this.height = 70;
-        //this.width = 60;
+        // this.height = 70;
+        // this.width = 60;
         this.throw();
     }
 
@@ -35,7 +35,7 @@ class ThrowableObject extends MoveableObject {
         this.applyGravity();
         setInterval(() => {
             this.x += 10;
-            this.playAnimation(this.IMAGES);
+            //this.playAnimation(this.IMAGES_THROW);
         }, 25);
     }
 }
