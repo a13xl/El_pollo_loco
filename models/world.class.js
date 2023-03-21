@@ -33,13 +33,13 @@ class World {
         if(this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 110, this.character.y + 120)
             this.throwableObject.push(bottle);
-            console.log(this.throwableObject);
         }
     }
 
     checkCollisions() {
         this.checkCollisionsEnemy();
         this.checkCollisionsThrowable();
+        this.checkCollisionsCollectible();
     }
 
     checkCollisionsEnemy() {
@@ -66,6 +66,15 @@ class World {
         });
     }
 
+    checkCollisionsCollectible() {
+        this.level.collectible.forEach((item, index) => {
+            if(this.character.isColliding(item)) {
+                this.character.collectedCoins += 1;
+                this.level.collectible.splice(index, 1);
+            }
+        });
+    }
+
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -78,7 +87,7 @@ class World {
         this.addToMap(this.statusBar);
         this.ctx.translate(this.camera_x, 0);
 
-        //this.addObjectsToMap(this.level.collectible);
+        this.addObjectsToMap(this.level.collectible);
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
         this.addObjectsToMap(this.throwableObject);

@@ -1,16 +1,16 @@
 let level1 = new Level([
     new Chicken(400),
-    new Chicken(700),
-    new Chicken(1000),
-    new Chicken(1300),
+    new Chicken(900),
     new Chicken(1600),
-    new Chicken(1900),
+    new Chicken(2300),
+    new Chicken(2800),
+    new Chicken(3600),
     new SmallChicken(550),
     new SmallChicken(850),
-    new SmallChicken(1150),
-    new SmallChicken(1450),
-    new SmallChicken(1750),
-    new SmallChicken(2150)
+    new SmallChicken(1000),
+    new SmallChicken(1800),
+    new SmallChicken(2500),
+    new SmallChicken(3300)
 ],
 [
     new Cloud(0),

@@ -4,6 +4,8 @@ class Character extends MoveableObject {
     width = 150;
     speed = 10;
     hp = 100;
+    collectedCoins = 0;
+    collectedBottles = 0;
 
     offset = {top: 113, bottom: 15, left: 20, right: 20};
 

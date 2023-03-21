@@ -52,6 +52,6 @@ class ThrowableObject extends MoveableObject {
         setTimeout(() => {
             this.height = 0;
             this.width = 0;
-        }, 70);
+        }, 150);
     }
 }
