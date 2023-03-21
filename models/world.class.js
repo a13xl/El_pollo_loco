@@ -24,32 +24,45 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkCollisions();
             this.checkThrowObjects();
-        }, 60);
+            this.checkCollisions();
+        }, 40);
     }
 
     checkThrowObjects() {
         if(this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 110, this.character.y + 120)
             this.throwableObject.push(bottle);
+            console.log(this.throwableObject);
         }
     }
 
     checkCollisions() {
         this.checkCollisionsEnemy();
+        this.checkCollisionsThrowable();
     }
 
     checkCollisionsEnemy() {
         this.level.enemies.forEach((enemy, index) => {
-            if(this.character.isColliding(enemy)) {
+            if(this.character.isColliding(enemy)) {             // not working 100% (only 75%)
                 if(this.character.speedY < 0 && this.character.isAboveGround()) { // jump on enemy
-                    this.level.enemies[index].hit(5); // this.world.level.enemies.splice(index, 1); | remove hit chicken
+                    this.level.enemies[index].hit(10); // remove hit chicken:  this.level.enemies.splice(index, 1);
                 } else if(!this.level.enemies[index].isDead()) {
                     this.character.hit(5);
                     this.statusBar.setPercentage(this.character.hp);
                 }
             }
+        });
+    }
+
+    checkCollisionsThrowable() {
+        this.throwableObject.forEach((bottle, i) => {
+            this.level.enemies.forEach((enemy, index) => {
+                if(bottle.isColliding(enemy)) { // hit enemy
+                    this.level.enemies[index].hit(20);
+                    this.throwableObject[i].hit(20);
+                }
+            });
         });
     }
 
