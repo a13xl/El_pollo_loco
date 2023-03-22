@@ -43,7 +43,7 @@ class ThrowableObject extends MoveableObject {
             if(this.isDead() || this.y >= 340) {
                 this.splash();
             }
-        }, 25);   
+        }, 25);
     }
 
     splash() {
@@ -52,6 +52,6 @@ class ThrowableObject extends MoveableObject {
         setTimeout(() => {
             this.height = 0;
             this.width = 0;
-        }, 150);
+        }, 100);
     }
 }

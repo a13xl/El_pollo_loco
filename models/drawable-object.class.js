@@ -38,4 +38,12 @@ class DrawableObject {
             this.imageCache[path] = img;
         });
     }
+
+    loadTxt() {
+        ctx.font = "40px zabars", "40px Arial", "40px sans-serif";
+        ctx.fillStyle = "black";
+        ctx.bord
+        ctx.fillText(this.character.collectedCoin, 110, 95);
+        ctx.fillText(this.character.collectedBottle, 340, 55);
+    }
 }

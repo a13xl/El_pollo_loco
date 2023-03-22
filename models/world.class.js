@@ -1,6 +1,7 @@
 class World {
     character = new Character();
     statusBar = new StatusBar();
+    coinBar = new CoinBar();
 
     level = level1;
     canvas;
@@ -69,7 +70,14 @@ class World {
     checkCollisionsCollectible() {
         this.level.collectible.forEach((item, index) => {
             if(this.character.isColliding(item)) {
-                this.character.collectedCoins += 1;
+                if(item['constructor']['name'] == 'Coin') {
+                    this.character.collectedCoin++;
+                    this.drawCollectedItemNum(this.ctx);
+                    console.log('collected Coins:', this.character.collectedCoin);
+                } else if(item['constructor']['name'] == 'Bottle') { 
+                    this.character.collectedBottle++;
+                }
+
                 this.level.collectible.splice(index, 1);
             }
         });
@@ -85,12 +93,15 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         // ----- Space for fixed objects -----
         this.addToMap(this.statusBar);
+        this.addToMap(this.coinBar);
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.collectible);
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
         this.addObjectsToMap(this.throwableObject);
+        
+        this.drawCollectedItemNum(this.ctx);
 
         this.ctx.translate(-this.camera_x, 0);
         this.drawAgain();
@@ -102,6 +113,14 @@ class World {
         requestAnimationFrame(function() {
             self.draw();
         });
+    }
+
+    drawCollectedItemNum(ctx) {
+        ctx.font = "40px zabars", "40px Arial", "40px sans-serif";
+        ctx.fillStyle = "black";
+        ctx.bord
+        ctx.fillText(this.character.collectedCoin, 110, 95);
+        ctx.fillText(this.character.collectedBottle, 110, 130);
     }
 
     addObjectsToMap(objects) {
