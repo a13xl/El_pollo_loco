@@ -81,6 +81,7 @@ class Character extends MoveableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
+
         this.applyGravity();
         this.animate();
     }
@@ -114,11 +115,9 @@ class Character extends MoveableObject {
             } else if(this.isAboveGround()) {
                 // Jumping animation
                 this.playAnimation(this.IMAGES_JUMPING);
-            } else {
-                if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
-                    // Walking animation
-                    this.playAnimation(this.IMAGES_WALKING);
-                }
+            } else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
+                // Walking animation
+                this.playAnimation(this.IMAGES_WALKING);
             }
         }, 50);
     }

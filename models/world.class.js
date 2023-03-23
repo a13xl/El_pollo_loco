@@ -2,6 +2,7 @@ class World {
     character = new Character();
     statusBar = new StatusBar();
     coinBar = new CoinBar();
+    bottleBar = new BottleBar();
 
     level = level1;
     canvas;
@@ -72,8 +73,9 @@ class World {
             if(this.character.isColliding(item)) {
                 if(item['constructor']['name'] == 'Coin') {
                     this.character.collectedCoin++;
-                    this.drawCollectedItemNum(this.ctx);
-                    console.log('collected Coins:', this.character.collectedCoin);
+
+                    // this.drawCollectedItemNum(this.ctx); // TEST
+
                 } else if(item['constructor']['name'] == 'Bottle') { 
                     this.character.collectedBottle++;
                 }
@@ -94,6 +96,8 @@ class World {
         // ----- Space for fixed objects -----
         this.addToMap(this.statusBar);
         this.addToMap(this.coinBar);
+        this.addToMap(this.bottleBar);
+
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.collectible);
@@ -101,7 +105,7 @@ class World {
         this.addToMap(this.character);
         this.addObjectsToMap(this.throwableObject);
         
-        this.drawCollectedItemNum(this.ctx);
+        // this.drawCollectedItemNum(this.ctx); // TEST
 
         this.ctx.translate(-this.camera_x, 0);
         this.drawAgain();
@@ -115,14 +119,12 @@ class World {
         });
     }
 
+    // TEST
     drawCollectedItemNum(ctx) {
-        ctx.font = "40px zabars", "40px Arial", "40px sans-serif";
-        ctx.fillStyle = "black";
-        ctx.bord
-        ctx.fillText(this.character.collectedCoin, 110, 95);
-        ctx.fillText(this.character.collectedBottle, 110, 130);
+        this.character.drawText(ctx, this.character.collectedCoin, 110, 95);
+        this.character.drawText(ctx, this.character.collectedBottle, 110, 135);
     }
-
+ 
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
@@ -136,10 +138,11 @@ class World {
 
         mo.draw(this.ctx);
         mo.drawFrame(this.ctx); // draw Frame around character and chicken
-
         if(mo.otherDirection) {
             this.flipImageBack(mo);
         }
+
+        this.drawCollectedItemNum(this.ctx); // TEST
     }
 
     flipImage(mo) {

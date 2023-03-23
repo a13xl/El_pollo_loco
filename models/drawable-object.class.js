@@ -8,7 +8,7 @@ class DrawableObject {
     width = 100;
 
     loadImage(path) {
-        this.img = new Image(); // this.img = document.getElementByID('image')
+        this.img = new Image();
         this.img.src = path;
     }
 
@@ -17,7 +17,7 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if(this instanceof Character || this instanceof Chicken || this instanceof SmallChicken || this instanceof Endboss || this instanceof Coin || this instanceof ThrowableObject) {
+        if(this instanceof Character || this instanceof Chicken || this instanceof SmallChicken || this instanceof Endboss || this instanceof Coin || this instanceof ThrowableObject || this instanceof Bottle) {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'blue';
@@ -39,11 +39,10 @@ class DrawableObject {
         });
     }
 
-    loadTxt() {
+    drawText(ctx, string, x, y) {
         ctx.font = "40px zabars", "40px Arial", "40px sans-serif";
         ctx.fillStyle = "black";
-        ctx.bord
-        ctx.fillText(this.character.collectedCoin, 110, 95);
-        ctx.fillText(this.character.collectedBottle, 340, 55);
+        ctx.fillText(string, x, y)  /* (this.character.collectedCoin, 110, 95);
+        ctx.fillText(this.character.collectedBottle, 110, 130); */
     }
 }
