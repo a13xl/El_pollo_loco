@@ -73,9 +73,6 @@ class World {
             if(this.character.isColliding(item)) {
                 if(item['constructor']['name'] == 'Coin') {
                     this.character.collectedCoin++;
-
-                    // this.drawCollectedItemNum(this.ctx); // TEST
-
                 } else if(item['constructor']['name'] == 'Bottle') { 
                     this.character.collectedBottle++;
                 }
@@ -89,23 +86,18 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.level.backgroundObjects);
-        this.addObjectsToMap(this.level.clouds);
+        this.drawBackground();
 
         this.ctx.translate(-this.camera_x, 0);
         // ----- Space for fixed objects -----
-        this.addToMap(this.statusBar);
-        this.addToMap(this.coinBar);
-        this.addToMap(this.bottleBar);
-
+            this.drawFixedObjects();
+        // ----- Space for fixed objects -----
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.collectible);
         this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
         this.addObjectsToMap(this.throwableObject);
-        
-        // this.drawCollectedItemNum(this.ctx); // TEST
 
         this.ctx.translate(-this.camera_x, 0);
         this.drawAgain();
@@ -119,10 +111,21 @@ class World {
         });
     }
 
-    // TEST
+    drawFixedObjects() {
+        this.addToMap(this.statusBar);
+        this.addToMap(this.coinBar);
+        this.addToMap(this.bottleBar);
+        this.drawCollectedItemNum(this.ctx);
+    }
+
+    drawBackground() {
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
+    }
+
     drawCollectedItemNum(ctx) {
-        this.character.drawText(ctx, this.character.collectedCoin, 110, 95);
-        this.character.drawText(ctx, this.character.collectedBottle, 110, 135);
+        this.character.drawText(ctx, this.character.collectedCoin, 80, 95);
+        this.character.drawText(ctx, this.character.collectedBottle, 80, 135);
     }
  
     addObjectsToMap(objects) {
@@ -141,8 +144,6 @@ class World {
         if(mo.otherDirection) {
             this.flipImageBack(mo);
         }
-
-        this.drawCollectedItemNum(this.ctx); // TEST
     }
 
     flipImage(mo) {
