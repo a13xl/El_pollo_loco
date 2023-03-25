@@ -72,7 +72,7 @@ class Character extends MoveableObject {
         'img/2_character_pepe/1_idle/idle/I-20.png'
     ];
 
-    world;
+    //world;
     walking_sound = new Audio('audio/running.mp3');
 
     constructor() {

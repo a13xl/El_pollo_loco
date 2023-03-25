@@ -27,7 +27,9 @@ class Chicken extends MoveableObject{
 
      animate() {
         setInterval(() => {
-            this.moveLeft();
+            if(!this.isDead()) {
+                this.moveLeft();
+            }
         },1000 / 60); // 60 picture per second
 
         setInterval(() => {

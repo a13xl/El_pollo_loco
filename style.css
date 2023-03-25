@@ -20,6 +20,7 @@ h1 {
 canvas {
     background-color: black;
     display: block;
+    border-radius: 15px;
 }
 
 /* ========== Smartphone ========== */

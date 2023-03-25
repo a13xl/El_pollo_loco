@@ -2,6 +2,7 @@ class ThrowableObject extends MoveableObject {
     height = 70;
     width = 60;
     speedY = 0;
+    hp = 5;
 
     IMAGES_THROW =[
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -47,7 +48,7 @@ class ThrowableObject extends MoveableObject {
 
     splash() {
         this.speedY = 0;
-        this.playAnimation(this.IMAGES_SPLASH);
+        this.playAnimationOnce(this.IMAGES_SPLASH);
         setTimeout(() => {
             this.height = 0;
             this.width = 0;

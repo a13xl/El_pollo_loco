@@ -10,6 +10,7 @@ class World {
     keyboard;
     camera_x = 0;
     throwableObject = [];
+    firstContact = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -28,8 +29,14 @@ class World {
         setInterval(() => {
             this.checkThrowObjects();
             this.checkCollisions();
-            this.checkCollisionsThrowable();
+            this.checkBossSpawn();
         }, 40);
+    }
+
+    checkCollisions() {
+        this.checkCollisionsEnemy();
+        this.checkCollisionsThrowable();
+        this.checkCollisionsCollectible();
     }
 
     checkThrowObjects() {
@@ -38,12 +45,6 @@ class World {
             this.throwableObject.push(bottle); // push bottle to Array, for calculating
             this.character.collectedBottle--; // collected Bottle (in Character) - 1
         }
-    }
-
-    checkCollisions() {
-        this.checkCollisionsEnemy();
-        
-        this.checkCollisionsCollectible();
     }
 
     checkCollisionsEnemy() {
@@ -61,9 +62,11 @@ class World {
 
     checkCollisionsThrowable() {
         this.throwableObject.forEach((bottle, i) => {
+            if(!this.throwableObject[i].isDead());
             this.level.enemies.forEach((enemy, index) => {
                 if(bottle.isColliding(enemy)) { // hit enemy
                     this.level.enemies[index].hit(20);
+                    this.throwableObject[i].hit(100);
                 }
             });
         });
@@ -85,10 +88,18 @@ class World {
 
     checkHpThroughCoins() {
         if(this.character.collectedCoin >= 10) {
-            //debugger;
             this.character.hp += 20;
             this.character.collectedCoin -= 10;
             this.statusBar.setPercentage(this.character.hp);
+        }
+    }
+
+    // NOT WORKING
+    checkBossSpawn() { // Spawn Boss
+        if(this.character.x >= 3000 && !this.firstContact) {
+            this.firstContact = true;
+            // debugger;
+            // this.level.enemies.push(new Endboss(3300));
         }
     }
 
@@ -150,7 +161,7 @@ class World {
         }
 
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx); // draw Frame around character and chicken
+        // mo.drawFrame(this.ctx); // draw Frame around character and chicken
         if(mo.otherDirection) {
             this.flipImageBack(mo);
         }
