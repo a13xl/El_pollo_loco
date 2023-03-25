@@ -28,19 +28,21 @@ class World {
         setInterval(() => {
             this.checkThrowObjects();
             this.checkCollisions();
+            this.checkCollisionsThrowable();
         }, 40);
     }
 
     checkThrowObjects() {
-        if(this.keyboard.D) {
+        if(this.keyboard.D && this.character.collectedBottle > 0) {
             let bottle = new ThrowableObject(this.character.x + 110, this.character.y + 120)
-            this.throwableObject.push(bottle);
+            this.throwableObject.push(bottle); // push bottle to Array, for calculating
+            this.character.collectedBottle--; // collected Bottle (in Character) - 1
         }
     }
 
     checkCollisions() {
         this.checkCollisionsEnemy();
-        this.checkCollisionsThrowable();
+        
         this.checkCollisionsCollectible();
     }
 
@@ -62,7 +64,6 @@ class World {
             this.level.enemies.forEach((enemy, index) => {
                 if(bottle.isColliding(enemy)) { // hit enemy
                     this.level.enemies[index].hit(20);
-                    this.throwableObject[i].hit(20);
                 }
             });
         });
@@ -73,13 +74,22 @@ class World {
             if(this.character.isColliding(item)) {
                 if(item['constructor']['name'] == 'Coin') {
                     this.character.collectedCoin++;
+                    this.checkHpThroughCoins();
                 } else if(item['constructor']['name'] == 'Bottle') { 
                     this.character.collectedBottle++;
                 }
-
                 this.level.collectible.splice(index, 1);
             }
         });
+    }
+
+    checkHpThroughCoins() {
+        if(this.character.collectedCoin >= 10) {
+            //debugger;
+            this.character.hp += 20;
+            this.character.collectedCoin -= 10;
+            this.statusBar.setPercentage(this.character.hp);
+        }
     }
 
     draw() {

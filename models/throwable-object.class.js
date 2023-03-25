@@ -1,7 +1,6 @@
 class ThrowableObject extends MoveableObject {
     height = 70;
     width = 60;
-    hp = 20;
     speedY = 0;
 
     IMAGES_THROW =[

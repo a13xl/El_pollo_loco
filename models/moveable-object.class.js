@@ -17,15 +17,6 @@ class MoveableObject extends DrawableObject{
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
-            /* if (this instanceof Character && (this.y > 135)) {
-                this.y = 135;
-            }
-            if ((this instanceof MoveableObject) && (this.y > 340)) {
-                this.y = 340;
-            }
-            if (!this.isAboveGround()) {
-                this.speedY = 0;
-            } */
         }, 1000 / 25);
     }
 
@@ -69,15 +60,6 @@ class MoveableObject extends DrawableObject{
         this.img = this.imageCache[path];
         this.currentImage++;
     }
-
-    /* playAnimationOnce(images) {
-        let counter = 0;
-        let path = images[counter];
-        this.img = this.imageCache[path];
-        if (this.counter <= images.length ) {
-            this.currentImage++;
-        }
-    } */
 
     moveRight() {
         this.x += this.speed;
