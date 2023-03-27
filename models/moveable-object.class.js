@@ -4,6 +4,8 @@ class MoveableObject extends DrawableObject{
     speedY = 0;
     acceleration = 2.5;
     lastHit = 0;
+    lastMove = 0;
+
     offset = {
         top: 0,
         bottom: 0,
@@ -79,5 +81,17 @@ class MoveableObject extends DrawableObject{
 
     jump() {
         this.speedY = 25;
+    }
+
+    isIdle(lastAction) {
+        let timeNow = new Date().getTime();
+        let timeDiff = timeNow - lastAction;
+        return timeDiff > 3000; // 3 seconds
+    }
+
+    isIdleLong(lastAction) {
+        let timeNow = new Date().getTime();
+        let timeDiff = timeNow - lastAction;
+        return timeDiff > 5000; // 3 seconds
     }
 }
