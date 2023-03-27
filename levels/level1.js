@@ -12,7 +12,7 @@ let level1 = new Level([
     new SmallChicken(2500),
     new SmallChicken(3300),
 
-    new Endboss(4000)
+    //new Endboss(4000)
 ],
 [
     new Cloud(0),

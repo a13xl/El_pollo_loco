@@ -50,8 +50,9 @@ class World {
     checkCollisionsEnemy() {
         this.level.enemies.forEach((enemy, index) => {
             if(this.character.isColliding(enemy)) {             // not working 100% (only 75%)
-                if(this.character.speedY < 0 && this.character.isAboveGround()) { // jump on enemy
-                    this.level.enemies[index].hit(10); // remove hit chicken:  this.level.enemies.splice(index, 1);
+                let constructor = enemy['constructor']['name'] == 'Endboss';
+                if(this.character.speedY < 0 && this.character.isAboveGround() && !constructor) { // jump on enemy
+                    this.level.enemies[index].hit(10);
                 } else if(!this.level.enemies[index].isDead()) {
                     this.character.hit(5);
                     this.statusBar.setPercentage(this.character.hp);
@@ -99,12 +100,10 @@ class World {
         }
     }
 
-    // NOT WORKING
     checkBossSpawn() { // Spawn Boss
-        if(this.character.x >= 3000 && !this.firstContact) {
+        if(this.character.x >= 3400 && !this.firstContact) {
             this.firstContact = true;
-            // debugger;
-            // this.level.enemies.push(new Endboss(3300));
+            this.level.enemies.push(new Endboss(4000));
         }
     }
 

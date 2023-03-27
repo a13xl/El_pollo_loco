@@ -89,7 +89,13 @@ class Endboss extends MoveableObject {
                 break;
             default:
                 this.playAnimation(this.IMAGES_WALKING);
-                this.moveLeft();
+                if(this.x > world.character.x) {
+                    this.otherDirection = false;
+                    this.moveLeft();
+                } else  {
+                    this.otherDirection = true;
+                    this.moveRight();
+                }
                 i++;
                 break;
         }
