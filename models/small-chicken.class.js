@@ -20,7 +20,8 @@ class SmallChicken extends MoveableObject{
         this.loadImages(this.IMAGES_WALKING);
 
         this.x = x + Math.random() * 200;
-        this.speed = 0.15 + Math.random() * 0.5;
+        this.speedOrg = 0.15 + Math.random() * 0.5;
+        this.speed = this.speedOrg;
 
         this.animate();
      }
@@ -31,7 +32,7 @@ class SmallChicken extends MoveableObject{
         },1000 / 60); // 60 picture per second
 
         setInterval(() => {
-            if(!this.isDead()) {
+            if(!this.isDead() && this.speed > 0) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 200);

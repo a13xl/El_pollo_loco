@@ -55,7 +55,8 @@ class Endboss extends MoveableObject {
         this.loadImages(this.IMAGES_DEAD);
 
         this.x = x;
-        this.speed = 40;
+        this.speedOrg = 40;
+        this.speed = this.speedOrg;
 
         this.animate();
     }
@@ -63,12 +64,11 @@ class Endboss extends MoveableObject {
     animate() {
         let i = 0;
         setInterval(() => {
-            if(!this.isDead()) {
+            if(!this.isDead() && this.speed > 0) {
                 i = this.attack(i);
             } else if(this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-            }
-            if(this.isDead()) {
+            } else if(this.isDead()) {
                 this.playAnimationOnce(this.IMAGES_DEAD);
             }
         }, 200);

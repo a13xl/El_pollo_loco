@@ -25,11 +25,13 @@ class World {
         this.character.world = this;
     }
 
+    // ==================== ACTION FUNCTIONS ====================
     run() {
         setInterval(() => {
             this.checkThrowObjects();
             this.checkCollisions();
             this.checkBossSpawn();
+            this.characterIdle();
         }, 40);
     }
 
@@ -112,6 +114,19 @@ class World {
         }
     }
 
+    characterIdle() {
+        if(this.character.idle) {
+            this.level.enemies.forEach(enemy => {
+                enemy.speed = 0;
+            });
+        } else {
+            this.level.enemies.forEach(enemy => {
+                enemy.speed = enemy.speedOrg;
+            });
+        }
+    }
+
+    // ==================== DRAW FUNCTIONS ====================
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 

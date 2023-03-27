@@ -7,6 +7,7 @@ class Character extends MoveableObject {
     collectedCoin = 0;
     collectedBottle = 0;
     lastAction = new Date().getTime();
+    idle = false;
 
     offset = {top: 113, bottom: 15, left: 20, right: 20};
 
@@ -114,7 +115,7 @@ class Character extends MoveableObject {
             this.moveToLeft();
         }
 
-        if(this.world.keyboard.SPACE && !this.isAboveGround()) {
+        if(this.world.keyboard.SPACE && !this.isAboveGround() || this.world.keyboard.UP && !this.isAboveGround()) {
             this.jump();
             this.lastAction = new Date().getTime();
         }
@@ -158,8 +159,12 @@ class Character extends MoveableObject {
     animateImgSlow() {
         if(this.isIdleLong(this.lastAction)) {
             this.playAnimation(this.IMAGES_IDLE_LONG);
+            this.idle = true;
         } else if(this.isIdle(this.lastAction)) {
             this.playAnimation(this.IMAGES_IDLE);
+            this.idle = true;
+        } else {
+            this.idle = false;
         }
     }
 
