@@ -61,14 +61,19 @@ class World {
     }
 
     checkCollisionsThrowable() {
-        this.throwableObject.forEach((bottle, i) => {
-            if(!this.throwableObject[i].isDead());
-            this.level.enemies.forEach((enemy, index) => {
-                if(bottle.isColliding(enemy)) { // hit enemy
-                    this.level.enemies[index].hit(20);
-                    this.throwableObject[i].hit(100);
+        this.throwableObject.forEach((bottle) => {
+            if(!bottle.isDead()) {
+                if(bottle.y >= 340) { // hit ground
+                    bottle.hit(100);
+                } else {
+                    this.level.enemies.forEach((enemy, index) => {
+                        if(bottle.isColliding(enemy)) { // hit enemy
+                            enemy.hit(20);
+                            bottle.hit(100); 
+                        }
+                    });
                 }
-            });
+            }
         });
     }
 

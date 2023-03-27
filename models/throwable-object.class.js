@@ -40,7 +40,7 @@ class ThrowableObject extends MoveableObject {
                 this.x += 10;
                 this.playAnimation(this.IMAGES_THROW);
             }
-            if(this.isDead() || this.y >= 340) {
+            if(this.isDead()) { // || this.y >= 340
                 this.splash();
             }
         }, 25);
