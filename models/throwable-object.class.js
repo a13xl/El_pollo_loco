@@ -33,11 +33,18 @@ class ThrowableObject extends MoveableObject {
     }
 
     throw() {
+        //debugger;
         this.speedY = 20;
         this.applyGravity();
         setInterval(() => {
             if(this.y < 340 && !this.isDead()) {
-                this.x += 10;
+                if(world.character.otherDirection) {
+                    this.otherDirection = true;
+                    this.x -= 10;
+                } else {
+                    this.otherDirection = false;
+                    this.x += 10;
+                }
                 this.playAnimation(this.IMAGES_THROW);
             }
             if(this.isDead()) { // || this.y >= 340

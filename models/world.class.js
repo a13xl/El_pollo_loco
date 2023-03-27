@@ -41,7 +41,12 @@ class World {
 
     checkThrowObjects() {
         if(this.keyboard.D && this.character.collectedBottle > 0) {
-            let bottle = new ThrowableObject(this.character.x + 110, this.character.y + 120)
+            let bottle;
+            if(this.character.otherDirection) {
+                bottle = new ThrowableObject(this.character.x + 0, this.character.y + 120);
+            } else {
+                bottle = new ThrowableObject(this.character.x + 110, this.character.y + 120);
+            }
             this.throwableObject.push(bottle); // push bottle to Array, for calculating
             this.character.collectedBottle--; // collected Bottle (in Character) - 1
         }
@@ -49,7 +54,7 @@ class World {
 
     checkCollisionsEnemy() {
         this.level.enemies.forEach((enemy, index) => {
-            if(this.character.isColliding(enemy)) {             // not working 100% (only 75%)
+            if(this.character.isColliding(enemy)) {
                 let constructor = enemy['constructor']['name'] == 'Endboss';
                 if(this.character.speedY < 0 && this.character.isAboveGround() && !constructor) { // jump on enemy
                     this.level.enemies[index].hit(10);
