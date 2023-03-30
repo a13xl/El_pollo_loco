@@ -144,12 +144,12 @@ class Character extends MoveableObject {
         if(this.isDead()) {
             this.playAnimation(this.IMAGES_DEAD);
             this.lastAction = new Date().getTime();
-        } else if(this.isHurt()) {
-            this.playAnimation(this.IMAGES_HURT);
-            this.lastAction = new Date().getTime();
         } else if(this.isAboveGround()) {
             // Jumping animation
             this.playAnimation(this.IMAGES_JUMPING);
+        } else if(this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+            this.lastAction = new Date().getTime();
         } else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
             // Walking animation
             this.playAnimation(this.IMAGES_WALKING);
