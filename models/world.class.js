@@ -52,6 +52,7 @@ class World {
             this.throwableObject.push(bottle); // push bottle to Array, for calculating
             this.character.collectedBottle--; // collected Bottle (in Character) - 1
         }
+        this.character.lastAction = new Date().getTime(); // set Character lastAction to now
     }
 
     checkCollisionsEnemy() {
@@ -170,7 +171,7 @@ class World {
 
     drawCollectedItemNum(ctx) {
         this.character.drawText(ctx, this.character.collectedCoin, 80, 95);
-        this.character.drawText(ctx, this.character.collectedBottle, 80, 135);
+        this.character.drawText(ctx, this.character.collectedBottle, 80, 137);
     }
  
     addObjectsToMap(objects) {

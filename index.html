@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts/fonts.css">
 
+    <script src="js/main.js"></script>
+
     <script src="./models/drawable-object.class.js"></script>
     <script src="./models/moveable-object.class.js"></script>
     <script src="./models/character.class.js"></script>
@@ -31,11 +33,68 @@
 
     <script src="./js/game.js"></script>
 </head>
-<body onload="init()">
+<body> <!-- onload="init()" -->
 
     <h1 id="title">El pollo loco</h1>
 
-    <canvas id="canvas" width="720" height="480"></canvas>
+    
+
+    <div id="gameContainer">
+
+        <canvas id="canvas" width="720" height="480" class="d-none"></canvas>
+        
+        <img id="audio" src="img/icons/audio.png" alt="Audio Icon" onclick="toggleAudio()">
+        <!-- <img id="fullscreen" src="img/icons/fullscreen-enter.png" alt="Fullscreen Icon"> -->
+
+        <!-- START SCREEN -->
+        <div id="startScreen" class="intro-outro">                          <!-- class="start-end_background" -->
+            <img id="start-end_background" src="img/9_intro_outro_screens/start/startscreen_1.png" alt="Start Picture" onmouseover="pointOutBtn(0.7, 1)" onmouseout="pointOutBtn(1, 0.6)">
+
+            <img id="introOutroBtn" src="img/icons/play.png" alt="Play Button" class="start-btn" onmouseover="pointOutBtn(0.7, 1)" onmouseout="pointOutBtn(1, 0.6)" onclick="startGame()">
+            <img id="infoBtn" src="img/icons/info.png" alt="Information Icon" onclick="showCloseInfos()">
+            
+        </div>
+
+        <!-- INFO SCREEN -->
+        <div id="infoContainer" class="intro-outro d-none">
+            <img src="img/icons/back.png" alt="Return Button" class="return-btn" onclick="showCloseInfos()">
+
+            <h1>Description:</h1>
+
+            <div class="info_key-container">
+                <span class="neg-margin-left">jumping</span>
+                <img src="img/icons/key-up.png" alt="Up Key" class="neg-margin-left">
+                <div>
+                    <span>moving left</span>
+                    <img src="img/icons/key-left.png" alt="Left Key">
+
+                    <img src="img/icons/key-down.png" alt="Down Key">
+
+                    <img src="img/icons/key-right.png" alt="Right Key">
+                    <span>moving right</span>
+                </div>
+                <div class="info_spacekey">
+                    <span>jumping</span>
+                    <img src="img/icons/key-space.png" alt="Space Key">
+                </div>
+                <br>
+                <div class="info_collectable">
+                    <span>10x</span>
+                    <img src="img/coin.png" alt="Coin Image">
+                    <span>= +20 hp</span>
+                    <img src="img/heart.png" alt="Heart Image">
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    
+    <!-- Description
+    10 Coins = 20 hp
+    3 sec or more = pause
+    -->
     
 </body>
 </html>

@@ -86,6 +86,6 @@ class MoveableObject extends DrawableObject{
     isIdleLong(lastAction) {
         let timeNow = new Date().getTime();
         let timeDiff = timeNow - lastAction;
-        return timeDiff > 5000; // 3 seconds
+        return timeDiff > 5000; // 5 seconds
     }
 }

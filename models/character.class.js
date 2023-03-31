@@ -142,7 +142,7 @@ class Character extends MoveableObject {
 
     animateImg() {
         if(this.isDead()) {
-            this.playAnimation(this.IMAGES_DEAD);
+            this.playAnimationOnce(this.IMAGES_DEAD);
             this.lastAction = new Date().getTime();
         } else if(this.isAboveGround()) {
             // Jumping animation
