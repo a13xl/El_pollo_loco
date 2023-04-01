@@ -47,8 +47,10 @@ class SmallChicken extends MoveableObject{
                 this.offset = {top: 100, bottom: 100, left: 100, right: 100};
                 this.speed = 0;
                 this.loadImage(this.IMAGES_DEAD);
-                if(!this.hitSoundPlayed && !mute) {
-                    this.hit_sound.play();
+                if(!this.hitSoundPlayed) {
+                    if(!mute) {
+                        this.hit_sound.play();
+                    }
                     this.hitSoundPlayed = true;
                 }
             }

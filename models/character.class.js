@@ -190,6 +190,8 @@ class Character extends MoveableObject {
         setInterval(() => {
             if(this.idle && !mute) {
                 this.snoring_sound.play();
+            } else {
+                this.snoring_sound.pause();
             }
         }, 500);
     }

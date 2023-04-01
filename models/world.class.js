@@ -15,6 +15,7 @@ class World {
     collect_sound = new Audio('audio/collect.mp3');
     background_sound = new Audio('audio/cumbia-mexican-banda.mp3');
     defaultBackgroundSound = true;
+    endboss_sound = new Audio('audio/boss.mp3')
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -36,7 +37,7 @@ class World {
             if(this.defaultBackgroundSound && !mute) {
                 this.background_sound.play();
                 this.background_sound.volume = 0.05;
-            } else if(mute) {
+            } else {
                 this.background_sound.pause();
             }
         }, 500);
@@ -132,8 +133,20 @@ class World {
         if(this.character.x >= 3400 && !this.firstContact) {
             this.firstContact = true;
             this.level.enemies.push(new Endboss(4000));
-            this.background_sound.pause();
+            this.defaultBackgroundSound = false;
+            this.playEnbossSound();
         }
+    }
+
+    playEnbossSound() {
+        setInterval(() => {
+            if(!mute) {
+                this.endboss_sound.play();
+                this.endboss_sound.volume = 0.2;
+            } else {
+                this.endboss_sound.pause();
+            }
+        }, 500);
     }
 
     characterIdle() {
