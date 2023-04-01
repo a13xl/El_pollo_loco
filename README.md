@@ -6,3 +6,4 @@ Aufgaben:
 08. Game Over Screen (Verlieren/Gewinnen)
 09. Fullscreen (canvas.requestFullscreen())
 10. Erklärung wie Spiel funktioniert
+11. idle funktioniert nicht

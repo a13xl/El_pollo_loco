@@ -33,7 +33,7 @@
 
     <script src="./js/game.js"></script>
 </head>
-<body> <!-- onload="init()" -->
+<body>
 
     <h1 id="title">El pollo loco</h1>
 
@@ -46,13 +46,23 @@
         <img id="audio" src="img/icons/audio.png" alt="Audio Icon" onclick="toggleAudio()">
         <!-- <img id="fullscreen" src="img/icons/fullscreen-enter.png" alt="Fullscreen Icon"> -->
 
+        <div id="mobileControl">
+            <div>
+                <img id="keypressLeft" src="img/icons/arrow-left.png" alt="Left Arrow">
+                <img id="keypressUp" src="img/icons/arrow-up.png" alt="Up Arrow">
+            </div>
+            <div>
+                <img id="keypressThrow" src="img/icons/throw.png" alt="Throw Image" style="border-radius: 0;">
+                <img id="keypressRight" src="img/icons/arrow-right.png" alt="Right Arrow">
+            </div>
+        </div>
+
         <!-- START SCREEN -->
         <div id="startScreen" class="intro-outro">                          <!-- class="start-end_background" -->
             <img id="start-end_background" src="img/9_intro_outro_screens/start/startscreen_1.png" alt="Start Picture" onmouseover="pointOutBtn(0.7, 1)" onmouseout="pointOutBtn(1, 0.6)">
 
             <img id="introOutroBtn" src="img/icons/play.png" alt="Play Button" class="start-btn" onmouseover="pointOutBtn(0.7, 1)" onmouseout="pointOutBtn(1, 0.6)" onclick="startGame()">
             <img id="infoBtn" src="img/icons/info.png" alt="Information Icon" onclick="showCloseInfos()">
-            
         </div>
 
         <!-- INFO SCREEN -->
@@ -78,6 +88,11 @@
                     <img src="img/icons/key-space.png" alt="Space Key">
                 </div>
                 <br>
+                <div>
+                    <img src="img/icons/key-d.png" alt="D Key">
+                    <span>throwing</span>
+                </div>
+                <br>
                 <div class="info_collectable">
                     <span>10x</span>
                     <img src="img/coin.png" alt="Coin Image">
@@ -87,7 +102,28 @@
             </div>
         </div>
 
-        
+        <!-- KEY DESCRIPTION UNDER SCREEN -->
+        <div class="key-description">
+            <div>
+                <span>moving left</span>
+                <img src="img/icons/key-left.png" alt="Left Key">
+            </div>
+            <div>
+                <span>moving right</span>
+                <img src="img/icons/key-right.png" alt="Right Key">
+            </div>
+            <div>
+                <span>jumping</span>
+                <img src="img/icons/key-up.png" alt="Up Key">
+                /
+                <img src="img/icons/key-space.png" alt="Space Key">
+            </div>
+            <div>
+                <span>throwing</span>
+                <img src="img/icons/key-d.png" alt="D Key">
+            </div>
+        </div>
+
     </div>
 
     

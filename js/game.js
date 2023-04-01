@@ -7,11 +7,11 @@ function init() {
 
     initLvl();
     world = new World(canvas, keyboard);
+    mobileButtons();
     //console.log('My Character is', world.character);
 }
 
 window.addEventListener("keydown", (e) => {
-
     switch (e.keyCode) {
         case 39:
             keyboard.RIGHT = true;
@@ -65,3 +65,52 @@ window.addEventListener("keyup", (e) => {
 
     //console.log(e);
 });
+
+function mobileButtons() {
+    document.getElementById('keypressLeft').addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      keyboard.LEFT = true;
+    });
+    
+    
+    document.getElementById('keypressLeft').addEventListener('touchend', (e) => {
+      e.preventDefault();
+      keyboard.LEFT = false;
+    });
+    
+    
+    document.getElementById('keypressRight').addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      keyboard.RIGHT = true;
+    });
+    
+    
+    document.getElementById('keypressRight').addEventListener('touchend', (e) => {
+      e.preventDefault();
+      keyboard.RIGHT = false;
+    });
+    
+    
+    document.getElementById('keypressThrow').addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      keyboard.D = true;
+    });
+    
+    
+    document.getElementById('keypressThrow').addEventListener('touchend', (e) => {
+      e.preventDefault();
+      keyboard.D = false;
+    });
+    
+    
+    document.getElementById('keypressUp').addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      keyboard.UP = true;
+    });
+    
+    
+    document.getElementById('keypressUp').addEventListener('touchend', (e) => {
+      e.preventDefault();
+      keyboard.UP = false;
+    });
+}
