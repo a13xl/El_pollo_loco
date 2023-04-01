@@ -4,6 +4,8 @@ class Endboss extends MoveableObject {
     width = 300;
     hp = 100;
     
+    background_music = new Audio('audio/boss.mp3');
+
     offset = {top: 70, bottom: 15, left: 60, right: 50};
 
     IMAGES_WALKING = [

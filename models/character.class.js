@@ -6,7 +6,7 @@ class Character extends MoveableObject {
     hp = 100;
     collectedCoin = 0;
     collectedBottle = 0;
-    lastAction = new Date().getTime();
+    lastAction = new Date().getTime() - 3000;
     idle = false;
 
     offset = {top: 113, bottom: 15, left: 20, right: 20};
@@ -130,20 +130,26 @@ class Character extends MoveableObject {
     moveToLeft() {
         this.moveLeft();
         this.otherDirection = true;
-        this.walking_sound.play();
+        if(!mute) {
+            this.walking_sound.play();
+        }
         this.lastAction = new Date().getTime();
     }
 
     moveToRight() {
         this.moveRight();
         this.otherDirection = false;
-        this.walking_sound.play();
+        if(!mute) {
+            this.walking_sound.play();
+        }
         this.lastAction = new Date().getTime();
     }
 
     jumping() {
         this.jump();
-        this.jump_sound.play();
+        if(!mute) {
+            this.jump_sound.play(); 
+        }
         this.lastAction = new Date().getTime();
     }
 
@@ -157,7 +163,9 @@ class Character extends MoveableObject {
         } else if(this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
             this.lastAction = new Date().getTime();
-            this.hurt_sound.play();
+            if(!mute) {
+                this.hurt_sound.play();
+            }
         } else if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
             // Walking animation
             this.playAnimation(this.IMAGES_WALKING);
@@ -180,7 +188,7 @@ class Character extends MoveableObject {
 
     snoringSound() {
         setInterval(() => {
-            if(this.idle) {
+            if(this.idle && !mute) {
                 this.snoring_sound.play();
             }
         }, 500);

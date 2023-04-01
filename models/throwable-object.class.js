@@ -69,7 +69,9 @@ class ThrowableObject extends MoveableObject {
     }
 
     playSplashSound() {
-        this.splash_sound.play();
+        if(!mute) {
+            this.splash_sound.play();
+        }
         this.splashSoundPlayed = true;
     }
 }

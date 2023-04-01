@@ -13,6 +13,8 @@ class World {
     firstContact = false;
 
     collect_sound = new Audio('audio/collect.mp3');
+    background_sound = new Audio('audio/cumbia-mexican-banda.mp3');
+    defaultBackgroundSound = true;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -21,6 +23,7 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+        this.backgroundSound();
     }
 
     setWorld() {
@@ -28,6 +31,17 @@ class World {
     }
 
     // ==================== ACTION FUNCTIONS ====================
+    backgroundSound() {
+        setInterval(() => {
+            if(this.defaultBackgroundSound && !mute) {
+                this.background_sound.play();
+                this.background_sound.volume = 0.05;
+            } else if(mute) {
+                this.background_sound.pause();
+            }
+        }, 500);
+    }
+
     run() {
         setInterval(() => {
             this.checkThrowObjects();
@@ -99,7 +113,7 @@ class World {
                 } else if(item['constructor']['name'] == 'Bottle') { 
                     this.character.collectedBottle++;
                 }
-                this.collect_sound.play();
+                this.collectableSound();
                 this.level.collectible.splice(index, 1);
             }
         });
@@ -118,6 +132,7 @@ class World {
         if(this.character.x >= 3400 && !this.firstContact) {
             this.firstContact = true;
             this.level.enemies.push(new Endboss(4000));
+            this.background_sound.pause();
         }
     }
 
@@ -130,6 +145,12 @@ class World {
             this.level.enemies.forEach(enemy => {
                 enemy.speed = enemy.speedOrg;
             });
+        }
+    }
+
+    collectableSound() {
+        if(!mute) {
+            this.collect_sound.play();
         }
     }
 

@@ -1,7 +1,6 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let background_sound = new Audio('audio/cumbia-mexican-banda.mp3');
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -10,8 +9,6 @@ function init() {
     world = new World(canvas, keyboard);
     mobileButtons();
     //console.log('My Character is', world.character);
-
-    background_sound.play();
 }
 
 window.addEventListener("keydown", (e) => {
