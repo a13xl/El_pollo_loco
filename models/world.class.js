@@ -81,7 +81,7 @@ class World {
                     this.level.enemies.forEach((enemy, index) => {
                         if(bottle.isColliding(enemy)) { // hit enemy
                             enemy.hit(20);
-                            bottle.hit(100); 
+                            bottle.hit(100);
                         }
                     });
                 }

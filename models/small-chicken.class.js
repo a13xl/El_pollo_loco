@@ -4,6 +4,9 @@ class SmallChicken extends MoveableObject{
     width = 50;
     hp = 10;
 
+    hit_sound = new Audio('audio/chicken02.mp3');
+    hitSoundPlayed = false;
+
     offset = {top: 0, bottom: 0, left: 5, right: 5};
     
     IMAGES_WALKING = [
@@ -44,6 +47,10 @@ class SmallChicken extends MoveableObject{
                 this.offset = {top: 100, bottom: 100, left: 100, right: 100};
                 this.speed = 0;
                 this.loadImage(this.IMAGES_DEAD);
+                if(!this.hitSoundPlayed) {
+                    this.hit_sound.play();
+                    this.hitSoundPlayed = true;
+                }
             }
         }, 50);
     }
