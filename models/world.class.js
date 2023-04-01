@@ -12,6 +12,8 @@ class World {
     throwableObject = [];
     firstContact = false;
 
+    collect_sound = new Audio('audio/collect.mp3');
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -61,6 +63,7 @@ class World {
                 let constructor = enemy['constructor']['name'] == 'Endboss';
                 if(this.character.speedY < 0 && this.character.isAboveGround() && !constructor) { // jump on enemy
                     this.level.enemies[index].hit(10);
+                    this.character.jumping();
                 } else if(!this.level.enemies[index].isDead()) {
                     this.character.hit(5);
                     this.statusBar.setPercentage(this.character.hp);
@@ -70,7 +73,7 @@ class World {
     }
 
     checkCollisionsThrowable() {
-        this.throwableObject.forEach((bottle) => {
+        this.throwableObject.forEach((bottle, i) => {
             if(!bottle.isDead()) {
                 if(bottle.y >= 340) { // hit ground
                     bottle.hit(100);
@@ -89,12 +92,14 @@ class World {
     checkCollisionsCollectible() {
         this.level.collectible.forEach((item, index) => {
             if(this.character.isColliding(item)) {
+                this.collect_sound.pause();
                 if(item['constructor']['name'] == 'Coin') {
                     this.character.collectedCoin++;
                     this.checkHpThroughCoins();
                 } else if(item['constructor']['name'] == 'Bottle') { 
                     this.character.collectedBottle++;
                 }
+                this.collect_sound.play();
                 this.level.collectible.splice(index, 1);
             }
         });
@@ -103,6 +108,7 @@ class World {
     checkHpThroughCoins() {
         if(this.character.collectedCoin >= 10) {
             this.character.hp += 20;
+            this.character.heal_sound.play();
             this.character.collectedCoin -= 10;
             this.statusBar.setPercentage(this.character.hp);
         }

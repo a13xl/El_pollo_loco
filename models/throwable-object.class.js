@@ -3,6 +3,9 @@ class ThrowableObject extends MoveableObject {
     width = 60;
     speedY = 0;
     hp = 5;
+    splashSoundPlayed = false;
+
+    splash_sound = new Audio('audio/glass.mp3');
 
     IMAGES_THROW =[
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -56,9 +59,17 @@ class ThrowableObject extends MoveableObject {
     splash() {
         this.speedY = 0;
         this.playAnimationOnce(this.IMAGES_SPLASH);
+        if(!this.splashSoundPlayed) {
+            this.playSplashSound();
+        }
         setTimeout(() => {
             this.height = 0;
             this.width = 0;
         }, 100);
+    }
+
+    playSplashSound() {
+        this.splash_sound.play();
+        this.splashSoundPlayed = true;
     }
 }
