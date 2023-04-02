@@ -11,6 +11,7 @@ class World {
     camera_x = 0;
     throwableObject = [];
     firstContact = false;
+    throwCooldown = new Date().getTime();
 
     collect_sound = new Audio('audio/collect.mp3');
     background_sound = new Audio('audio/cumbia-mexican-banda.mp3');
@@ -67,7 +68,8 @@ class World {
     }
 
     checkThrowObjects() {
-        if(this.keyboard.D && this.character.collectedBottle > 0 && !gameOver) {
+        let cooldown = this.checkThrowCooldown();
+        if(this.keyboard.D && this.character.collectedBottle > 0 && !gameOver && !cooldown) {
             let bottle;
             if(this.character.otherDirection) {
                 bottle = new ThrowableObject(this.character.x + 0, this.character.y + 120);
@@ -77,6 +79,7 @@ class World {
             this.throwableObject.push(bottle); // push bottle to Array, for calculating
             this.character.collectedBottle--; // collected Bottle (in Character) - 1
             this.character.lastAction = new Date().getTime(); // set Character lastAction to now
+            this.throwCooldown = new Date().getTime();
         }
     }
 
@@ -152,6 +155,12 @@ class World {
             this.defaultBackgroundSound = false;
             this.playEnbossSound();
         }
+    }
+
+    checkThrowCooldown() {
+        let timeNow = new Date().getTime();
+        let timeDiff = timeNow - this.throwCooldown;
+        return timeDiff < 1000; // 1 second
     }
 
     playEnbossSound() {
