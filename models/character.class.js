@@ -107,6 +107,7 @@ class Character extends MoveableObject {
 
         setInterval(() => {
             this.animateImgSlow();
+            // this.endScreen();
         }, 200);
     }
 
@@ -155,7 +156,7 @@ class Character extends MoveableObject {
 
     animateImg() {
         if(this.isDead()) {
-            this.playAnimation(this.IMAGES_DEAD);
+            this.playAnimationOnce(this.IMAGES_DEAD);
             gameOver = true;
             finishGame(false); // won = false
         } else if(this.isAboveGround()) {
@@ -177,10 +178,10 @@ class Character extends MoveableObject {
         if(this.isIdleLong(this.lastAction) && !this.isDead()) {
             this.playAnimation(this.IMAGES_IDLE_LONG);
             this.idle = true;
+            this.snoringSound();
         } else if(this.isIdle(this.lastAction) && !this.isDead()) {
             this.playAnimation(this.IMAGES_IDLE);
             this.idle = true;
-            this.snoringSound();
         } else {
             this.idle = false;
             this.snoring_sound.pause();
@@ -196,4 +197,16 @@ class Character extends MoveableObject {
             }
         }, 500);
     }
+
+    /* endScreen() {
+        if(this.isDead() && gameOver) {
+            setTimeout(() => {
+                this.loadImage(this.IMAGES_DEAD[0]);
+            }, 1000);
+        } else if(gameOver) {
+            setTimeout(() => {
+                this.loadImage(this.IMAGES_WALKING[0]);
+            }, 1000);
+        }
+    } */
 }

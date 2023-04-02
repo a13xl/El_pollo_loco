@@ -20,12 +20,7 @@ function startGame() {
 }
 
 function restartGame() {
-    document.getElementById('canvas').classList.remove('canvasEndscreen');
-    document.getElementById('endScreen').classList.add('d-none');
-//debugger;
-    gameOver = false;
-    init();
-    startGame();
+    location.reload();
 }
 
 function showCloseInfos() {
@@ -47,13 +42,25 @@ function toggleAudio() {
 }
 
 function finishGame(won) {
+    let audio;
     let img = document.getElementById('win-loseImg');
     document.getElementById('canvas').classList.add('canvasEndscreen');
     document.getElementById('endScreen').classList.remove('d-none');
 
     if(won) {
         img.src = "img/9_intro_outro_screens/game_over/game over!_01.png";
+        audio = new Audio('audio/win.mp3');
     } else {
         img.src = "img/9_intro_outro_screens/game_over/you lost_01.png";
+        audio = new Audio('audio/lose.mp3');
+    }
+
+    playFinishSound(audio);
+}
+
+function playFinishSound(audio) {
+    if(!mute) {
+        audio.play();
+        audio.volume = 0.2;
     }
 }

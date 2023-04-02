@@ -34,7 +34,7 @@ class World {
     // ==================== ACTION FUNCTIONS ====================
     backgroundSound() {
         setInterval(() => {
-            if(this.defaultBackgroundSound && !mute && gameStarted) {
+            if(this.defaultBackgroundSound && !mute && gameStarted && !gameOver) {
                 this.background_sound.play();
                 this.background_sound.volume = 0.05;
             } else {
@@ -50,6 +50,14 @@ class World {
             this.checkBossSpawn();
             this.characterIdle();
         }, 40);
+
+        setInterval(() => {
+            this.checkCollisionCharacter();
+        }, 100);
+
+        setInterval(() => {
+            this.clearAllIntervals();
+        }, 1000);
     }
 
     checkCollisions() {
@@ -79,10 +87,17 @@ class World {
                 if(this.character.speedY < 0 && this.character.isAboveGround() && !constructor) { // jump on enemy
                     this.level.enemies[index].hit(10);
                     this.character.jumping();
-                } else if(!this.level.enemies[index].isDead()) {
+                }
+            }
+        });
+    }
+
+    checkCollisionCharacter() {
+        this.level.enemies.forEach((enemy, index) => {
+            if(this.character.isColliding(enemy)) {
+                if(!this.level.enemies[index].isDead()) {
                     this.character.hit(5);
                     this.statusBar.setPercentage(this.character.hp);
-                    //this.checkCharacterDied();
                 }
             }
         });
@@ -141,22 +156,14 @@ class World {
 
     playEnbossSound() {
         setInterval(() => {
-            if(!mute) {
+            if(!mute && !gameOver) {
                 this.endboss_sound.play();
                 this.endboss_sound.volume = 0.2;
             } else {
                 this.endboss_sound.pause();
             }
-        }, 500);
+        }, 300);
     }
-
-    /* checkCharacterDied() {
-        if(this.character.isDead()) {
-            console.log("You have lost Game!");
-            gameOver = true;
-            finishGame(false); // won = false
-        }
-    } */
 
     characterIdle() {
         if(this.character.idle || gameOver) {
@@ -180,6 +187,14 @@ class World {
         }
     }
 
+    /* Alternative (quick and dirty), um alle Intervalle zu beenden. */
+    clearAllIntervals() {
+        if(gameOver) {
+            for (let i = 1; i < 9999; i++) window.clearInterval(i);
+            this.endboss_sound.pause();
+        }
+    }
+
     // ==================== DRAW FUNCTIONS ====================
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -188,8 +203,8 @@ class World {
         this.drawBackground();
 
         this.addObjectsToMap(this.level.collectible);
-        this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
+        this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObject);
 
         this.ctx.translate(-this.camera_x, 0);
