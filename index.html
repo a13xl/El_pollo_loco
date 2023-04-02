@@ -58,10 +58,10 @@
         </div>
 
         <!-- START SCREEN -->
-        <div id="startScreen" class="intro-outro">                          <!-- class="start-end_background" -->
-            <img id="start-end_background" src="img/9_intro_outro_screens/start/startscreen_1.png" alt="Start Picture" onmouseover="pointOutBtn(0.7, 1)" onmouseout="pointOutBtn(1, 0.6)">
+        <div id="startScreen" class="intro-outro">
+            <img id="startBackground" class="start-end_background" src="img/9_intro_outro_screens/start/startscreen_1.png" alt="Start Picture" onmouseover="pointOutBtn(0.7, 1)" onmouseout="pointOutBtn(1, 0.6)">
 
-            <img id="introOutroBtn" src="img/icons/play.png" alt="Play Button" class="start-btn" onmouseover="pointOutBtn(0.7, 1)" onmouseout="pointOutBtn(1, 0.6)" onclick="startGame()">
+            <img id="introBtn" src="img/icons/play.png" alt="Play Button" class="start-btn" onmouseover="pointOutBtn(0.7, 1)" onmouseout="pointOutBtn(1, 0.6)" onclick="startGame()">
             <img id="infoBtn" src="img/icons/info.png" alt="Information Icon" onclick="showCloseInfos()">
         </div>
 
@@ -106,7 +106,15 @@
         </div>
 
         <!-- END SCREEN -->
+        <div id="endScreen" class="intro-outro d-none">
+            <!-- <img id="endBackground" class="start-end_background" src="img/5_background/first_half_background.png" alt="End Picture"> -->
 
+            <img id="win-loseImg" src=""></img>
+
+            <div id="outroBtn" onclick="startGame()">
+                Restart
+            </div>
+        </div>
 
         <!-- KEY DESCRIPTION UNDER SCREEN -->
         <div class="key-description">
