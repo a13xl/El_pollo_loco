@@ -33,9 +33,9 @@
 
     <script src="./js/game.js"></script>
 </head>
-<body>
+<body onload="init();">
 
-    <h1 id="title">El pollo loco</h1>
+    <h1 id="title" class="n-mark">El pollo loco</h1>
 
     
 
@@ -43,10 +43,10 @@
 
         <canvas id="canvas" width="720" height="480" class="d-none"></canvas>
         
-        <img id="audio" src="img/icons/audio.png" alt="Audio Icon" onclick="toggleAudio()">
+        <img id="audio" src="img/icons/audio.png" alt="Audio Icon" onclick="toggleAudio()" class="n-mark">
         <!-- <img id="fullscreen" src="img/icons/fullscreen-enter.png" alt="Fullscreen Icon"> -->
 
-        <div id="mobileControl">
+        <div id="mobileControl" class="n-mark">
             <div>
                 <img id="keypressLeft" src="img/icons/arrow-left.png" alt="Left Arrow">
                 <img id="keypressUp" src="img/icons/arrow-up.png" alt="Up Arrow">
@@ -58,7 +58,7 @@
         </div>
 
         <!-- START SCREEN -->
-        <div id="startScreen" class="intro-outro">
+        <div id="startScreen" class="intro-outro n-mark">
             <img id="startBackground" class="start-end_background" src="img/9_intro_outro_screens/start/startscreen_1.png" alt="Start Picture" onmouseover="pointOutBtn(0.7, 1)" onmouseout="pointOutBtn(1, 0.6)">
 
             <img id="introBtn" src="img/icons/play.png" alt="Play Button" class="start-btn" onmouseover="pointOutBtn(0.7, 1)" onmouseout="pointOutBtn(1, 0.6)" onclick="startGame()">
@@ -67,7 +67,7 @@
 
         <!-- INFO SCREEN -->
         <div id="infoContainer" class="intro-outro d-none">
-            <img src="img/icons/back.png" alt="Return Button" class="return-btn" onclick="showCloseInfos()">
+            <img src="img/icons/back.png" alt="Return Button" class="return-btn n-mark" onclick="showCloseInfos()">
 
             <h1>Description:</h1>
 
@@ -106,18 +106,17 @@
         </div>
 
         <!-- END SCREEN -->
-        <div id="endScreen" class="intro-outro d-none">
-            <!-- <img id="endBackground" class="start-end_background" src="img/5_background/first_half_background.png" alt="End Picture"> -->
+        <div id="endScreen" class="intro-outro d-none n-mark">
 
             <img id="win-loseImg" src=""></img>
 
-            <div id="outroBtn" onclick="startGame()">
+            <div id="outroBtn" onclick="restartGame()">
                 Restart
             </div>
         </div>
 
         <!-- KEY DESCRIPTION UNDER SCREEN -->
-        <div class="key-description">
+        <div class="key-description n-mark">
             <div>
                 <span>moving left</span>
                 <img src="img/icons/key-left.png" alt="Left Key">

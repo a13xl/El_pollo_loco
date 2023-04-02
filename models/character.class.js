@@ -113,15 +113,15 @@ class Character extends MoveableObject {
     moving() {
         this.walking_sound.pause();
 
-        if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){
+        if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !gameOver){
             this.moveToRight();
         }
 
-        if(this.world.keyboard.LEFT && this.x > 0){
+        if(this.world.keyboard.LEFT && this.x > 0 && !gameOver){
             this.moveToLeft();
         }
 
-        if(this.world.keyboard.SPACE && !this.isAboveGround() || this.world.keyboard.UP && !this.isAboveGround()) {
+        if(this.world.keyboard.SPACE && !this.isAboveGround() && !gameOver || this.world.keyboard.UP && !this.isAboveGround() && !gameOver) {
             this.jumping();
         }
         this.world.camera_x = -this.x + 100;
@@ -156,7 +156,8 @@ class Character extends MoveableObject {
     animateImg() {
         if(this.isDead()) {
             this.playAnimation(this.IMAGES_DEAD);
-            this.lastAction = new Date().getTime();
+            gameOver = true;
+            finishGame(false); // won = false
         } else if(this.isAboveGround()) {
             // Jumping animation
             this.playAnimation(this.IMAGES_JUMPING);
@@ -173,10 +174,10 @@ class Character extends MoveableObject {
     }
 
     animateImgSlow() {
-        if(this.isIdleLong(this.lastAction)) {
+        if(this.isIdleLong(this.lastAction) && !this.isDead()) {
             this.playAnimation(this.IMAGES_IDLE_LONG);
             this.idle = true;
-        } else if(this.isIdle(this.lastAction)) {
+        } else if(this.isIdle(this.lastAction) && !this.isDead()) {
             this.playAnimation(this.IMAGES_IDLE);
             this.idle = true;
             this.snoringSound();
@@ -188,7 +189,7 @@ class Character extends MoveableObject {
 
     snoringSound() {
         setInterval(() => {
-            if(this.idle && !mute) {
+            if(this.idle && !mute && gameStarted) {
                 this.snoring_sound.play();
             } else {
                 this.snoring_sound.pause();

@@ -34,7 +34,7 @@ class World {
     // ==================== ACTION FUNCTIONS ====================
     backgroundSound() {
         setInterval(() => {
-            if(this.defaultBackgroundSound && !mute) {
+            if(this.defaultBackgroundSound && !mute && gameStarted) {
                 this.background_sound.play();
                 this.background_sound.volume = 0.05;
             } else {
@@ -59,7 +59,7 @@ class World {
     }
 
     checkThrowObjects() {
-        if(this.keyboard.D && this.character.collectedBottle > 0) {
+        if(this.keyboard.D && this.character.collectedBottle > 0 && !gameOver) {
             let bottle;
             if(this.character.otherDirection) {
                 bottle = new ThrowableObject(this.character.x + 0, this.character.y + 120);
@@ -82,6 +82,7 @@ class World {
                 } else if(!this.level.enemies[index].isDead()) {
                     this.character.hit(5);
                     this.statusBar.setPercentage(this.character.hp);
+                    //this.checkCharacterDied();
                 }
             }
         });
@@ -149,16 +150,28 @@ class World {
         }, 500);
     }
 
+    /* checkCharacterDied() {
+        if(this.character.isDead()) {
+            console.log("You have lost Game!");
+            gameOver = true;
+            finishGame(false); // won = false
+        }
+    } */
+
     characterIdle() {
-        if(this.character.idle) {
-            this.level.enemies.forEach(enemy => {
-                enemy.speed = 0;
-            });
+        if(this.character.idle || gameOver) {
+            this.enemyPause();
         } else {
             this.level.enemies.forEach(enemy => {
                 enemy.speed = enemy.speedOrg;
             });
         }
+    }
+
+    enemyPause() {
+        this.level.enemies.forEach(enemy => {
+            enemy.speed = 0;
+        });
     }
 
     collectableSound() {
@@ -174,16 +187,16 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         this.drawBackground();
 
+        this.addObjectsToMap(this.level.collectible);
+        this.addObjectsToMap(this.level.enemies);
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.throwableObject);
+
         this.ctx.translate(-this.camera_x, 0);
         // ----- Space for fixed objects -----
             this.drawFixedObjects();
         // ----- Space for fixed objects -----
         this.ctx.translate(this.camera_x, 0);
-
-        this.addObjectsToMap(this.level.collectible);
-        this.addObjectsToMap(this.level.enemies);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.throwableObject);
 
         this.ctx.translate(-this.camera_x, 0);
         this.drawAgain();

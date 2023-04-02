@@ -15,7 +15,7 @@ class Bottle extends MoveableObject {
   constructor() {
     super();
 
-    this.x = 200 + Math.random()*3100;
+    this.x = 300 + Math.random()*3100;
 
     this.placeBottle();
   }
