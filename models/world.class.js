@@ -142,7 +142,9 @@ class World {
     checkHpThroughCoins() {
         if(this.character.collectedCoin >= 10) {
             this.character.hp += 20;
-            this.character.heal_sound.play();
+            if(!mute) {
+                this.character.heal_sound.play();
+            }
             this.character.collectedCoin -= 10;
             this.statusBar.setPercentage(this.character.hp);
         }
