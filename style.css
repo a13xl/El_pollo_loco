@@ -216,7 +216,9 @@ canvas {
 
 #win-loseImg {
     position: absolute;
+    height: 200px;
     width: 500px;
+    object-fit: contain;
     z-index: 2;
 }
 
@@ -289,6 +291,11 @@ canvas {
 
     canvas {
         border-radius: 0;
+    }
+
+    #endScreen {
+        position: absolute;
+        margin-top: -560px;
     }
 }
 
@@ -378,6 +385,16 @@ canvas {
     #infoContainer {
         height: 325px;
         overflow-y: scroll;
+    }
+}
+
+@media only screen and (max-height: 280px) {
+    #endScreen {
+        margin-top: -310px;
+    }
+
+    #outroBtn {
+        bottom: -25px;
     }
 }
 
