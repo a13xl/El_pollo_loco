@@ -6,6 +6,7 @@ body {
     min-height: 100vh;
     margin: 0;
     background-image: url('img/desert.png');
+    background-size: cover;
     background-position: center;
     font-family: 'zabars', Arial, Helvetica, sans-serif;
     font-size: 26px;
@@ -36,7 +37,7 @@ h1 {
 }
 
 .noLandscape {
-    display: none !important;
+    display: none;
 }
 
 /* ==================== */
@@ -395,7 +396,11 @@ canvas {
 @media (max-width: 760px) and (orientation: portrait) {
     .noLandscape {
         position: absolute;
+        height: 100vh;
+        width: 100vw;
         display: flex;
+        justify-content: center;
+        align-items: center;
         font-size: 64px;
     }
 
@@ -417,5 +422,15 @@ canvas {
 
     .key-description {
         display: none;
+    }
+
+    #mobileControl {
+        display: none !important;
+    }
+}
+
+@media (max-width: 912px) or (max-height: 912px) {
+    #mobileControl {
+        display: flex;
     }
 }
