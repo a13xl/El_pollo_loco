@@ -27,6 +27,8 @@ function showCloseInfos() {
     document.getElementById('startScreen').classList.toggle('d-none');
     document.getElementById('infoContainer').classList.toggle('d-none');
     document.getElementById('audio').classList.toggle('invert');
+
+    document.getElementById('mobileControl').classList.toggle('d-none');
 }
 
 function toggleAudio() {

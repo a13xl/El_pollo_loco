@@ -8,6 +8,7 @@ body {
     background-image: url('img/desert.png');
     background-position: center;
     font-family: 'zabars', Arial, Helvetica, sans-serif;
+    font-size: 26px;
 }
 
 h1 {
@@ -34,10 +35,14 @@ h1 {
     filter: invert(1);
 }
 
+.noLandscape {
+    display: none !important;
+}
+
 /* ==================== */
 .key-description {
     margin-top: 20px;
-    font-size: 26px;
+    /* font-size: 26px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -64,6 +69,8 @@ h1 {
 }
 
 canvas {
+    height: 100%;
+    width: 100%;
     background-color: black;
     display: block;
     border-radius: 15px;
@@ -144,7 +151,7 @@ canvas {
 
     display: flex;
     flex-direction: column;
-    font-size: 30px;
+    /* font-size: 30px; */
 }
 
 #infoContainer h1 {
@@ -175,7 +182,7 @@ canvas {
 }
 
 .info_spacekey {
-    padding-right: 92px;
+    padding-right: 82px;
 }
 
 .info_spacekey img {
@@ -208,7 +215,7 @@ canvas {
 
 #win-loseImg {
     position: absolute;
-    width: 800px;
+    width: 500px;
     z-index: 2;
 }
 
@@ -255,9 +262,32 @@ canvas {
     cursor: pointer;
 }
 
+/* === Height === */
 @media only screen and (max-height: 680px) {
-    h1 {
+    #title {
         margin-bottom: 0;
+    }
+}
+
+@media only screen and (max-height: 640px) {
+    #title {
+        margin: 0;
+    }
+}
+
+@media only screen and (max-height: 594px) {
+    #title {
+        display: none;
+    }
+}
+
+@media only screen and (max-height: 540px) {
+    .key-description {
+        display: none;
+    }
+
+    canvas {
+        border-radius: 0;
     }
 }
 
@@ -266,6 +296,92 @@ canvas {
         display: none;
     }
 
+    #mobileControl {
+        display: flex;
+    }
+
+    #gameContainer {
+        height: 100vh;
+        width: 100vw;
+        border-radius: 0;
+    }
+
+    #infoBtn {
+        position: fixed;
+    }
+
+    #audio {
+        position: fixed;
+    }
+
+    .return-btn {
+        position: fixed;
+    }
+
+    .start-end_background {
+        border-radius: 0;
+    }
+
+    canvas {
+        border-radius: 0;
+    }
+
+    #infoContainer {
+        border-radius: 0;
+    }
+
+    #endScreen {
+        margin-top: -530px;
+    }
+}
+
+@media only screen and (max-height: 455px) {
+    #endScreen {
+        margin-top: -455px;
+    }
+
+    #win-loseImg {
+        width: 250px;
+    }
+
+    #outroBtn {
+        bottom: 0;
+    }
+}
+
+@media only screen and (max-height: 420px) {
+    #infoContainer h1 {
+        font-size: 32px;
+    }
+
+    #infoContainer {
+        font-size: 18px;
+    }
+
+    .neg-margin-left {
+        margin-left: -8px;
+    }
+
+    .info_spacekey {
+        padding-right: 59px;
+    }
+}
+
+@media only screen and (max-height: 385px) {
+    #endScreen {
+        margin-top: -410px;
+    }
+}
+
+@media only screen and (max-height: 325px) {
+    #infoContainer {
+        height: 325px;
+        overflow-y: scroll;
+    }
+}
+
+/* === Width === */
+@media only screen and (max-width: 720px) {
     #gameContainer {
         height: 100vh;
         border-radius: 0;
@@ -274,39 +390,32 @@ canvas {
     .start-end_background {
         border-radius: 0;
     }
-
-    /* NOT WORKING */
-    canvas {
-        height: 100%;
-        border-radius: 0;
-    }
 }
 
-@media only screen and (max-height: 640px) {
-    h1 {
-        margin: 0;
+@media (max-width: 760px) and (orientation: portrait) {
+    .noLandscape {
+        position: absolute;
+        display: flex;
+        font-size: 64px;
     }
-}
 
-@media only screen and (max-height: 594px) {
-    h1 {
+    #gameContainer {
+        width: 100vw;
+    }
+
+    #startScreen {
         display: none;
     }
-}
 
-@media only screen and (max-width: 720px) {
-    #gameContainer {
-        height: 100vw;
-        border-radius: 0;
+    #title {
+        display: none;
     }
 
-    .start-end_background {
-        border-radius: 0;
+    #audio {
+        display: none;
     }
-}
 
-@media only screen and (max-width: 760px) {
-    canvas {
-        width: 100%;
+    .key-description {
+        display: none;
     }
 }
