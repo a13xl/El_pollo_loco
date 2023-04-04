@@ -1,6 +1,5 @@
 let level1;
 
-// NOT WORKING
 // Load images
 function initLvl() {
     // fill array

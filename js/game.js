@@ -34,8 +34,6 @@ window.addEventListener("keydown", (e) => {
         default:
             break;
     }
-
-    //console.log(e);
 });
 
 window.addEventListener("keyup", (e) => {
@@ -62,8 +60,6 @@ window.addEventListener("keyup", (e) => {
         default:
             break;
     }
-
-    //console.log(e);
 });
 
 function mobileButtons() {

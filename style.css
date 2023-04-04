@@ -444,7 +444,7 @@ canvas {
     }
 }
 
-@media (max-width: 720px) or (max-height: 720px) {
+@media (max-width: 720px) or (max-height: 540px) {
     #mobileControl {
         display: flex;
     }

@@ -6,7 +6,7 @@ class Character extends MoveableObject {
     hp = 100;
     collectedCoin = 0;
     collectedBottle = 0;
-    lastAction = new Date().getTime() - 3000;
+    lastAction = new Date().getTime();
     idle = false;
 
     offset = {top: 113, bottom: 15, left: 20, right: 20};
