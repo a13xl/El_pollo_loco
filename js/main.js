@@ -22,6 +22,8 @@ function startGame() {
 
 function restartGame() {
     world = undefined;
+    gameStarted = false;
+    gameOver = false;
 
     document.getElementById('startScreen').classList.remove('d-none');
     document.getElementById('canvas').classList.add('d-none');
@@ -31,8 +33,6 @@ function restartGame() {
     if(!mute) {
         click_sound.play();
     }
-
-    gameStarted = false;
 }
 
 function showCloseInfos() {
