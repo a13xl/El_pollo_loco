@@ -163,10 +163,7 @@ class Character extends MoveableObject {
             this.playAnimationOnce(this.IMAGES_DEAD);
             gameOver = true;
             finishGame(false); // won = false
-        } /* else if(this.isAboveGround()) {
-            // Jumping animation
-            this.playAnimation(this.IMAGES_JUMPING);
-        } */ else if(this.isHurt()) {
+        } else if(this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
             this.lastAction = new Date().getTime();
             if(!mute) {

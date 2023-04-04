@@ -73,11 +73,11 @@ class Endboss extends MoveableObject {
         }, 180);
 
         setInterval(() => {
-            if(!this.isDead() && this.speed > 0) {
-                i = this.attack(i);
-            } else if(this.isHurt()) {
+            if(this.isHurt() && !this.isDead()) {
                 this.playAnimation(this.IMAGES_HURT);
-            }
+            } else if(!this.isDead() && this.speed > 0 && !this.isHurt()) {
+                i = this.attack(i);
+            } 
         }, 200);
     }
 
