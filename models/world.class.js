@@ -151,7 +151,7 @@ class World {
     }
 
     checkBossSpawn() { // Spawn Boss
-        if(this.character.x >= 3400 && !this.firstContact) {
+        if(this.character.x >= 3200 && !this.firstContact) {
             this.firstContact = true;
             this.level.enemies.push(new Endboss(4000));
             this.defaultBackgroundSound = false;

@@ -171,10 +171,6 @@ canvas {
     gap: 5px;
 }
 
-/* .neg-margin-left {
-    margin-left: -13px;
-} */
-
 .info_key-container div {
     display: flex;
     justify-content: center;
@@ -197,16 +193,6 @@ canvas {
     width: 100px !important;
     border-radius: 8px;
 }
-
-/* .info_spacekey {
-    padding-right: 82px;
-}
-
-.info_spacekey img {
-    height: 30px;
-    width: 100px !important;
-    border-radius: 8px;
-} */
 
 .info_collectable img{
     width: 40px !important;
@@ -380,14 +366,6 @@ canvas {
 
     #infoContainer {
         font-size: 18px;
-    }
-
-    .neg-margin-left {
-        margin-left: -8px;
-    }
-
-    .info_spacekey {
-        padding-right: 59px;
     }
 }
 
