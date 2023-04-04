@@ -198,7 +198,7 @@ class World {
         }
     }
 
-    /* Alternative (quick and dirty), um alle Intervalle zu beenden. */
+    /* Quick and Dirty Intervalle beenden. */
     clearAllIntervals() {
         if(gameOver) {
             for (let i = 1; i < 9999; i++) window.clearInterval(i);

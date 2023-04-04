@@ -21,7 +21,7 @@ function startGame() {
 }
 
 function restartGame() {
-    resetGameValues();
+    world = undefined;
 
     document.getElementById('startScreen').classList.remove('d-none');
     document.getElementById('canvas').classList.add('d-none');
@@ -33,14 +33,6 @@ function restartGame() {
     }
 
     gameStarted = false;
-}
-
-function resetGameValues() {
-    world.character.hp = 100;
-    world.character.collectedCoin = 0;
-    world.character.collectedBottle = 0;
-
-    console.log(World.character);
 }
 
 function showCloseInfos() {
