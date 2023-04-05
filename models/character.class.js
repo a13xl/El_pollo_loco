@@ -93,6 +93,9 @@ class Character extends MoveableObject {
         this.animate();
     }
 
+    /**
+     * Animate Character
+     */
     animate() {
         setInterval(() => {
             this.moving();
@@ -111,10 +114,12 @@ class Character extends MoveableObject {
 
         setInterval(() => {
             this.animateImgSlow();
-            // this.endScreen();
         }, 200);
     }
 
+    /**
+     * Moving left and right and jumping on keypress
+     */
     moving() {
         this.walking_sound.pause();
 
@@ -132,6 +137,9 @@ class Character extends MoveableObject {
         this.world.camera_x = -this.x + 100;
     }
 
+    /**
+     * move to left and play walking sound
+     */
     moveToLeft() {
         this.moveLeft();
         this.otherDirection = true;
@@ -141,6 +149,9 @@ class Character extends MoveableObject {
         this.lastAction = new Date().getTime();
     }
 
+    /**
+     * move to right and play walking sound
+     */
     moveToRight() {
         this.moveRight();
         this.otherDirection = false;
@@ -150,6 +161,9 @@ class Character extends MoveableObject {
         this.lastAction = new Date().getTime();
     }
 
+    /**
+     * jumping and play jump sound
+     */
     jumping() {
         this.jump();
         if(!mute) {
@@ -158,6 +172,9 @@ class Character extends MoveableObject {
         this.lastAction = new Date().getTime();
     }
 
+    /**
+     * Animate for death, hurting and walking as fast interval
+     */
     animateImg() {
         if(this.isDead()) {
             this.playAnimationOnce(this.IMAGES_DEAD);
@@ -175,6 +192,9 @@ class Character extends MoveableObject {
         }
     }
 
+    /**
+     * animate jumping as medium fast interval
+     */
     animateImgMiddle() {
         if(this.isAboveGround()) {
             // Jumping animation
@@ -182,6 +202,9 @@ class Character extends MoveableObject {
         }
     }
 
+    /**
+     * check if character is idle and play animation for idle as slow interval
+     */
     animateImgSlow() {
         if(this.isIdleLong(this.lastAction) && !this.isDead()) {
             this.playAnimation(this.IMAGES_IDLE_LONG);
@@ -196,6 +219,10 @@ class Character extends MoveableObject {
         }
     }
 
+
+    /**
+     * play snoring sound when not muted
+     */
     snoringSound() {
         setInterval(() => {
             if(this.idle && !mute && gameStarted) {

@@ -1,6 +1,8 @@
 let level1;
 
-// Load images
+/**
+ * fill level1 array with enemies, background objects and collectable items
+ */
 function initLvl() {
     // fill array
     level1 = new Level([

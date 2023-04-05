@@ -3,11 +3,19 @@ let click_sound = new Audio('audio/button.mp3');
 let gameStarted = false;
 let gameOver = false;
 
+/**
+ * change contrast and opacity of start screen background and play button
+ * @param {number} contrast 
+ * @param {number} opacity 
+ */
 function pointOutBtn(contrast, opacity) {
     document.getElementById('startBackground').style.filter = `contrast(${contrast})`;
     document.getElementById('introBtn').style.filter = `opacity(${opacity})`;
 }
 
+/**
+ * hide start screen and show canvas. play click sound and load canvas Objects
+ */
 function startGame() {
     document.getElementById('startScreen').classList.add('d-none');
     document.getElementById('canvas').classList.remove('d-none');
@@ -20,6 +28,9 @@ function startGame() {
     init();
 }
 
+/**
+ * destroy canvas, set game arrays to default, play click sound and show start screen
+ */
 function restartGame() {
     world = undefined;
     gameStarted = false;
@@ -35,6 +46,9 @@ function restartGame() {
     }
 }
 
+/**
+ * show info Window and hide start screen
+ */
 function showCloseInfos() {
     document.getElementById('startScreen').classList.toggle('d-none');
     document.getElementById('infoContainer').classList.toggle('d-none');
@@ -43,6 +57,9 @@ function showCloseInfos() {
     document.getElementById('mobileControl').classList.toggle('d-none');
 }
 
+/**
+ * change audio icon and set audio to un-/mute
+ */
 function toggleAudio() {
     let img = document.getElementById('audio');
 
@@ -55,6 +72,10 @@ function toggleAudio() {
     }
 }
 
+/**
+ * show endscreen with win-/lose Picture and Sound
+ * @param {boolean} won 
+ */
 function finishGame(won) {
     let audio;
     let img = document.getElementById('win-loseImg');
@@ -72,6 +93,10 @@ function finishGame(won) {
     playFinishSound(audio);
 }
 
+/**
+ * Play sound with reduce volume when not muted
+ * @param {src} audio 
+ */
 function playFinishSound(audio) {
     if(!mute) {
         audio.play();

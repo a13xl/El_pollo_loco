@@ -20,6 +20,9 @@ class Bottle extends MoveableObject {
     this.placeBottle();
   }
 
+  /**
+   * place Bottle random
+   */
   placeBottle() {
     let rndNr = Math.floor(Math.random() * 2);
     if (rndNr <= 0) { // bottle on Ground

@@ -61,6 +61,9 @@ class Endboss extends MoveableObject {
         this.animate();
     }
 
+    /**
+     * animate image
+     */
     animate() {
         let i = 0;
         setInterval(() => {
@@ -80,6 +83,11 @@ class Endboss extends MoveableObject {
         }, 200);
     }
 
+    /**
+     * animate Alert -> Attack -> Moving in sequence
+     * @param {*} i 
+     * @returns number for animation
+     */
     attack(i) {
         switch (true) {
             case i < 7:
@@ -100,6 +108,9 @@ class Endboss extends MoveableObject {
         return i;
     }
 
+    /**
+     * move right or left, depending on the direction case
+     */
     moving() {
         this.playAnimation(this.IMAGES_WALKING);
         if(this.x > world.character.x) {

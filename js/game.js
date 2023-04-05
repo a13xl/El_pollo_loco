@@ -2,15 +2,22 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
+/**
+ * set and load canvas and load mobile buttons
+ */
 function init() {
     canvas = document.getElementById('canvas');
 
     initLvl();
     world = new World(canvas, keyboard);
-    mobileButtons();
+    mobileButtonsPressed();
+    mobileButtonsReleased();
     //console.log('My Character is', world.character);
 }
 
+/**
+ * action when button pressed
+ */
 window.addEventListener("keydown", (e) => {
     switch (e.keyCode) {
         case 39:
@@ -36,6 +43,9 @@ window.addEventListener("keydown", (e) => {
     }
 });
 
+/**
+ * action when button released
+ */
 window.addEventListener("keyup", (e) => {
 
     switch (e.keyCode) {
@@ -62,51 +72,52 @@ window.addEventListener("keyup", (e) => {
     }
 });
 
-function mobileButtons() {
+/**
+ * action when touchbuttons pressed
+ */
+function mobileButtonsPressed() {
     document.getElementById('keypressLeft').addEventListener('touchstart', (e) => {
       e.preventDefault();
       keyboard.LEFT = true;
     });
     
-    
-    document.getElementById('keypressLeft').addEventListener('touchend', (e) => {
-      e.preventDefault();
-      keyboard.LEFT = false;
-    });
-    
-    
     document.getElementById('keypressRight').addEventListener('touchstart', (e) => {
       e.preventDefault();
       keyboard.RIGHT = true;
     });
-    
-    
-    document.getElementById('keypressRight').addEventListener('touchend', (e) => {
-      e.preventDefault();
-      keyboard.RIGHT = false;
-    });
-    
-    
+     
     document.getElementById('keypressThrow').addEventListener('touchstart', (e) => {
       e.preventDefault();
       keyboard.D = true;
     });
     
-    
-    document.getElementById('keypressThrow').addEventListener('touchend', (e) => {
-      e.preventDefault();
-      keyboard.D = false;
-    });
-    
-    
     document.getElementById('keypressUp').addEventListener('touchstart', (e) => {
       e.preventDefault();
       keyboard.UP = true;
     });
-    
-    
+}
+
+/**
+ * action when touchbuttons released
+ */
+function mobileButtonsReleased() {
     document.getElementById('keypressUp').addEventListener('touchend', (e) => {
-      e.preventDefault();
-      keyboard.UP = false;
+        e.preventDefault();
+        keyboard.UP = false;
+    });
+
+    document.getElementById('keypressThrow').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.D = false;
+    });
+
+    document.getElementById('keypressRight').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    });
+
+    document.getElementById('keypressLeft').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
     });
 }
