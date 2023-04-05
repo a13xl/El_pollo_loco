@@ -7,6 +7,9 @@ class MoveableObject extends DrawableObject{
 
     offset = {top: 0, bottom: 0, left: 0, right: 0};
 
+    /**
+     * activate gravity for object. Object fly high and fall down.
+     */
     applyGravity() {
         setInterval(() => {
             if(this.isAboveGround() || this.speedY > 0) {
@@ -16,6 +19,10 @@ class MoveableObject extends DrawableObject{
         }, 1000 / 25);
     }
 
+    /**
+     * check if Object over ground like jumping or throwing
+     * @returns boolean
+     */
     isAboveGround() {
         if(this instanceof ThrowableObject) { // Throwable Object should always fall
             return true;
@@ -24,6 +31,11 @@ class MoveableObject extends DrawableObject{
         }
     }
 
+    /**
+     * check if object colliding and return true or false
+     * @param {*} mo 
+     * @returns boolean
+     */
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
@@ -31,6 +43,10 @@ class MoveableObject extends DrawableObject{
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
+    /**
+     * reduce hp with dmg value
+     * @param {*} dmg 
+     */
     hit(dmg) {
         this.hp -= dmg;
         if(this.hp < 0) {
@@ -40,16 +56,28 @@ class MoveableObject extends DrawableObject{
         }
     }
 
+    /**
+     * check if Object hurt. Cooldown 1 second.
+     * @returns boolean
+     */
     isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit; // Differnce in ms
+        let timepassed = new Date().getTime() - this.lastHit;
         timepassed = timepassed / 1000; // Difference in s
         return timepassed < 1;
     }
 
+    /**
+     * check if object is dead
+     * @returns boolean
+     */
     isDead() {
         return this.hp == 0;
     }
 
+    /**
+     * set Picture infinity in canvas
+     * @param {*} images 
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length; // let i = 0 mod 6 => 0, Rest 0 BIS let i = 6 mod 6 => 1, Rest 0
         let path = images[i];
@@ -57,6 +85,10 @@ class MoveableObject extends DrawableObject{
         this.currentImage++;
     }
 
+    /**
+     * set Picture in canvas
+     * @param {*} images 
+     */
     playAnimationOnce(images) {
         let path = images[this.currentImageOnceNr];
         this.img = this.imageCache[path];
@@ -65,27 +97,46 @@ class MoveableObject extends DrawableObject{
         }
     }
 
+    /**
+     * move to right. x-coordinate + speed
+     */
     moveRight() {
         this.x += this.speed;
     }
 
+    /**
+     * move to left. x-coordinate - speed
+     */
     moveLeft() {
             this.x -= this.speed;
     }
 
+    /**
+     * set Y speed for jumping
+     */
     jump() {
         this.speedY = 25;
     }
 
+    /**
+     * check if Object idle. Time Now - Last Action Object
+     * @param {*} lastAction 
+     * @returns boolean
+     */
     isIdle(lastAction) {
         let timeNow = new Date().getTime();
         let timeDiff = timeNow - lastAction;
-        return timeDiff > 3000; // 3 seconds
+        return timeDiff > 100;
     }
 
+    /**
+     * check if Object idle long. Time Now - Last Action Object
+     * @param {*} lastAction 
+     * @returns boolean
+     */
     isIdleLong(lastAction) {
         let timeNow = new Date().getTime();
         let timeDiff = timeNow - lastAction;
-        return timeDiff > 5000; // 5 seconds
+        return timeDiff > 3000; // 3 seconds
     }
 }

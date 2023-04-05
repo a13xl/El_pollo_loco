@@ -189,7 +189,7 @@ class Character extends MoveableObject {
             this.snoringSound();
         } else if(this.isIdle(this.lastAction) && !this.isDead()) {
             this.playAnimation(this.IMAGES_IDLE);
-            this.idle = true;
+            this.idle = false;
         } else {
             this.idle = false;
             this.snoring_sound.pause();
@@ -205,16 +205,4 @@ class Character extends MoveableObject {
             }
         }, 500);
     }
-
-    /* endScreen() {
-        if(this.isDead() && gameOver) {
-            setTimeout(() => {
-                this.loadImage(this.IMAGES_DEAD[0]);
-            }, 1000);
-        } else if(gameOver) {
-            setTimeout(() => {
-                this.loadImage(this.IMAGES_WALKING[0]);
-            }, 1000);
-        }
-    } */
 }

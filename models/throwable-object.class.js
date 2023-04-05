@@ -35,19 +35,16 @@ class ThrowableObject extends MoveableObject {
         this.throw();
     }
 
+    /**
+     * set speed of throwable object and call function
+     * throwObject if Object not dead (alreade hit ground or enemy)
+     */
     throw() {
         this.speedY = 20;
         this.applyGravity();
         setInterval(() => {
             if(this.y < 340 && !this.isDead()) {
-                if(world.character.otherDirection) {
-                    this.otherDirection = true;
-                    this.x -= 10;
-                } else {
-                    this.otherDirection = false;
-                    this.x += 10;
-                }
-                this.playAnimation(this.IMAGES_THROW);
+                this.throwObject();
             }
             if(this.isDead()) { // || this.y >= 340
                 this.splash();
@@ -55,6 +52,23 @@ class ThrowableObject extends MoveableObject {
         }, 25);
     }
 
+    /**
+     * throw Object from character coordinate
+     */
+    throwObject() {
+        if(world.character.otherDirection) {
+            this.otherDirection = true;
+            this.x -= 10;
+        } else {
+            this.otherDirection = false;
+            this.x += 10;
+        }
+        this.playAnimation(this.IMAGES_THROW);
+    }
+
+    /**
+     * play splash animation and call function splash sound once
+     */
     splash() {
         this.speedY = 0;
         this.playAnimationOnce(this.IMAGES_SPLASH);
@@ -67,6 +81,9 @@ class ThrowableObject extends MoveableObject {
         }, 100);
     }
 
+    /**
+     * play splash sound if not muted
+     */
     playSplashSound() {
         if(!mute) {
             this.splash_sound.play();

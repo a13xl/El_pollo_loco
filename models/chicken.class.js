@@ -27,9 +27,13 @@ class Chicken extends MoveableObject{
         this.speed = this.speedOrg;
 
         this.animate();
+        this.deadChicken();
      }
 
-     animate() {
+    /**
+    * move and animte chicken
+    */
+    animate() {
         setInterval(() => {
             if(!this.isDead()) {
                 this.moveLeft();
@@ -41,7 +45,12 @@ class Chicken extends MoveableObject{
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 200);
+    }
 
+    /**
+     * animate and play sound if chicken is dead
+     */
+    deadChicken() {
         setInterval(() => {
             if(this.isDead()) {
                 this.offset = {top: 100, bottom: 100, left: 100, right: 100};

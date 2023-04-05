@@ -28,11 +28,17 @@ class World {
         this.backgroundSound();
     }
 
+    /**
+     * Set World
+     */
     setWorld() {
         this.character.world = this;
     }
-
+    // ----------------------------------------------------------
     // ==================== ACTION FUNCTIONS ====================
+    /**
+     * Play Background Music when not muted
+     */
     backgroundSound() {
         setInterval(() => {
             if(this.defaultBackgroundSound && !mute && gameStarted && !gameOver) {
@@ -44,6 +50,9 @@ class World {
         }, 500);
     }
 
+    /**
+     * call function in Intervals like Collision Checking
+     */
     run() {
         setInterval(() => {
             this.checkThrowObjects();
@@ -61,12 +70,19 @@ class World {
         }, 1000);
     }
 
+    /**
+     * Check Collisions like Character with Enemy, Throwable Object with Enemy
+     * and Character with Collectible Objects
+     */
     checkCollisions() {
         this.checkCollisionsEnemy();
         this.checkCollisionsThrowable();
         this.checkCollisionsCollectible();
     }
 
+    /**
+     * throw Throwable Object when D-Key pressed and Cooldown more than 1 second
+     */
     checkThrowObjects() {
         let cooldown = this.checkThrowCooldown();
         if(this.keyboard.D && this.character.collectedBottle > 0 && !gameOver && !cooldown) {
@@ -83,6 +99,9 @@ class World {
         }
     }
 
+    /**
+     * do 10 damage on enemies when Character jumping on them, except Endboss
+     */
     checkCollisionsEnemy() {
         this.level.enemies.forEach((enemy, index) => {
             if(this.character.isColliding(enemy)) {
@@ -95,6 +114,9 @@ class World {
         });
     }
 
+    /**
+     * do 5 damage for character when he colliding with enemy
+     */
     checkCollisionCharacter() {
         this.level.enemies.forEach((enemy, index) => {
             if(this.character.isColliding(enemy)) {
@@ -106,6 +128,9 @@ class World {
         });
     }
 
+    /**
+     * if throwable object colliding a enemy do 20 damage and destroy bottle (throwable object)
+     */
     checkCollisionsThrowable() {
         this.throwableObject.forEach((bottle, i) => {
             if(!bottle.isDead()) {
@@ -123,6 +148,9 @@ class World {
         });
     }
 
+    /**
+     * collect Collectibale Object when colliding it
+     */
     checkCollisionsCollectible() {
         this.level.collectible.forEach((item, index) => {
             if(this.character.isColliding(item)) {
@@ -139,6 +167,9 @@ class World {
         });
     }
 
+    /**
+     * heal character for 20 hp after collecting 10 coins
+     */
     checkHpThroughCoins() {
         if(this.character.collectedCoin >= 10) {
             this.character.hp += 20;
@@ -150,6 +181,9 @@ class World {
         }
     }
 
+    /**
+     * Spawn Boss when character cross a define y-coordinate
+     */
     checkBossSpawn() { // Spawn Boss
         if(this.character.x >= 3200 && !this.firstContact) {
             this.firstContact = true;
@@ -159,12 +193,19 @@ class World {
         }
     }
 
+    /**
+     * check if throwable Object on cooldown
+     * @returns bollean
+     */
     checkThrowCooldown() {
         let timeNow = new Date().getTime();
         let timeDiff = timeNow - this.throwCooldown;
         return timeDiff < 1000; // 1 second
     }
 
+    /**
+     * play endboss sound when not muted
+     */
     playEnbossSound() {
         setInterval(() => {
             if(!mute && !gameOver) {
@@ -176,6 +217,9 @@ class World {
         }, 300);
     }
 
+    /**
+     * set enemy speed to 0 when character is idle else set speed to orginal speed
+     */
     characterIdle() {
         if(this.character.idle || gameOver) {
             this.enemyPause();
@@ -186,27 +230,38 @@ class World {
         }
     }
 
+    /**
+     * set enemy speed to 0
+     */
     enemyPause() {
         this.level.enemies.forEach(enemy => {
             enemy.speed = 0;
         });
     }
 
+    /**
+     * play sound for collected Object, when not muted
+     */
     collectableSound() {
         if(!mute) {
             this.collect_sound.play();
         }
     }
 
-    /* Quick and Dirty Intervalle beenden. */
+    /**
+     * clear all Intervals after game is over
+     */
     clearAllIntervals() {
         if(gameOver) {
             for (let i = 1; i < 9999; i++) window.clearInterval(i);
             this.endboss_sound.pause();
         }
     }
-
+    // --------------------------------------------------------
     // ==================== DRAW FUNCTIONS ====================
+    /**
+     * draw objects on canvas
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -228,14 +283,19 @@ class World {
         this.drawAgain();
     }
 
+    /**
+     * call draw function all the time
+     */
     drawAgain() {
-        // Draw() wird immer wieder ausgeführt
         let self = this;
         requestAnimationFrame(function() {
             self.draw();
         });
     }
 
+    /**
+     * draw fixed objects like statusbar
+     */
     drawFixedObjects() {
         this.addToMap(this.statusBar);
         this.addToMap(this.coinBar);
@@ -243,22 +303,37 @@ class World {
         this.drawCollectedItemNum(this.ctx);
     }
 
+    /**
+     * draw backgrounds like hills and clouds
+     */
     drawBackground() {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
     }
 
+    /**
+     * draw string for counted collectible Objects
+     * @param {*} ctx 
+     */
     drawCollectedItemNum(ctx) {
         this.character.drawText(ctx, this.character.collectedCoin, 80, 95);
         this.character.drawText(ctx, this.character.collectedBottle, 80, 137);
     }
  
+    /**
+     * add objects to map
+     * @param {*} objects 
+     */
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
         });
     }
 
+    /**
+     * Add Objects to Map and flip when it on other Direction
+     * @param {*} mo 
+     */
     addToMap(mo) {
         if(mo.otherDirection) {
             this.flipImage(mo);
@@ -271,6 +346,10 @@ class World {
         }
     }
 
+    /**
+     * flip Image like character when he moving to left
+     * @param {*} mo 
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -278,6 +357,10 @@ class World {
         mo.x = mo.x * -1;
     }
 
+    /**
+     * flip image back like character is moving right after he moved left
+     * @param {*} mo 
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();

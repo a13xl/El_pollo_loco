@@ -63,7 +63,6 @@ class Endboss extends MoveableObject {
 
     animate() {
         let i = 0;
-
         setInterval(() => {
             if(this.isDead()) {
                 this.playAnimationOnce(this.IMAGES_DEAD);
@@ -95,17 +94,21 @@ class Endboss extends MoveableObject {
                 i = 0;
                 break;
             default:
-                this.playAnimation(this.IMAGES_WALKING);
-                if(this.x > world.character.x) {
-                    this.otherDirection = false;
-                    this.moveLeft();
-                } else  {
-                    this.otherDirection = true;
-                    this.moveRight();
-                }
-                i++;
+                this.moving();
                 break;
         }
         return i;
+    }
+
+    moving() {
+        this.playAnimation(this.IMAGES_WALKING);
+        if(this.x > world.character.x) {
+            this.otherDirection = false;
+            this.moveLeft();
+        } else  {
+            this.otherDirection = true;
+            this.moveRight();
+        }
+        i++;
     }
 }
