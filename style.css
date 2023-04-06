@@ -419,15 +419,16 @@ canvas {
         font-size: 64px;
     }
 
-    #gameContainer {
-        width: 100vw;
-    }
-
-    #startScreen {
+    #title {
         display: none;
     }
 
-    #title {
+    #gameContainer {
+        /* width: 100vw; */
+        display: none;
+    }
+
+    /* #startScreen {
         display: none;
     }
 
@@ -442,6 +443,7 @@ canvas {
     #mobileControl {
         display: none !important;
     }
+    */
 }
 
 @media (max-width: 720px) or (max-height: 540px) {
