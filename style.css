@@ -459,3 +459,26 @@ canvas {
     color: white;
     cursor: pointer;
 }
+
+#legalNoticeContainer {
+    width: 100%;
+    overflow-y: auto;
+    background-image: url('img/pergament-papier.jpg');
+    background-size: cover;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+}
+
+#legalNoticeContainer p {
+    margin: 0;
+}
+
+#legalNoticeContainer div{
+    /* width: 100%;
+    overflow-y: auto; */
+}
