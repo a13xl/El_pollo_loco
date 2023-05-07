@@ -62,6 +62,13 @@
 
             <img id="introBtn" src="img/icons/play.png" alt="Play Button" class="start-btn" onmouseover="pointOutBtn(0.7, 1)" onmouseout="pointOutBtn(1, 0.6)" onclick="startGame()">
             <img id="infoBtn" src="img/icons/info.png" alt="Information Icon" onclick="showCloseInfos()">
+            <span id="legalNoticeBtn" onclick="includeHTML(); showCloseLegalNotice()">legal notice | privacy policy</span>
+        </div>
+
+        <!-- LEGAL NOTICE -->
+        <div id="legalNoticeContainer" class="intro-outro d-none">
+            <img src="img/icons/back.png" alt="Return Button" class="return-btn n-mark invert" onclick="showCloseLegalNotice()">
+            <div w3-include-html="./legal-notice.html"></div>
         </div>
 
         <!-- INFO SCREEN -->

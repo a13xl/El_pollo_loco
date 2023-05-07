@@ -451,3 +451,11 @@ canvas {
         display: flex;
     }
 }
+
+/* ============ legal notice ============ */
+#legalNoticeBtn {
+    position: absolute;
+    bottom: 10px;
+    color: white;
+    cursor: pointer;
+}
