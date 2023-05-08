@@ -474,6 +474,46 @@ canvas {
     font-size: 18px;
 }
 
+#legalNoticeContainer h1 {
+    font-size: 42px;
+}
+
+#legalNoticeContainer h2 {
+    font-size: 26px;
+}
+
 #legalNoticeContainer p {
     margin: 0;
+    font-size: 16px;
+}
+
+.legalNoticeMain {
+    overflow-y: auto;
+}
+
+.legalNotice {
+    padding: 50px 30px;
+}
+
+/* ===== Scrollbar ===== */
+/* width */
+::-webkit-scrollbar,#subtask-container::-webkit-scrollbar, textarea::-webkit-scrollbar{
+    width: 10px;
+  }
+  
+  /* Track */
+::-webkit-scrollbar-track,#subtask-container::-webkit-scrollbar-track,textarea::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+}
+   
+  /* Handle */
+::-webkit-scrollbar-thumb,#subtask-container::-webkit-scrollbar-thumb,textarea::-webkit-scrollbar-thumb {
+    background: #9b9a95; 
+    border-radius: 10px;
+}
+  
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover,#subtask-container::-webkit-scrollbar-thumb:hover,textarea::-webkit-scrollbar-thumb:hover {
+    background: #757470; 
 }
